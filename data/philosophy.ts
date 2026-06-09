@@ -1,26 +1,38 @@
 import type { PhilosophyItem } from "@/types";
 
-/** Drives DesignPhilosophyGrid on Home. Edit copy here, not in the component. */
+/**
+ * Drives the design-approach slider on Home ("Why Does his Design Approach Work?").
+ * Copy mirrors the Figma design. Edit here, not in the component.
+ */
 export const philosophy: PhilosophyItem[] = [
   {
-    title: "Clarity over cleverness",
-    description:
-      "Every screen earns its place. I cut the noise so the one thing that matters is impossible to miss.",
-    icon: "Sparkles",
+    title: "User First, Always",
+    description: "Designing with people in mind for effortless experiences.",
+    icon: "Users",
     tone: "orange",
   },
   {
-    title: "Evidence, not opinion",
-    description:
-      "Decisions are grounded in research, behaviour, and measurable outcomes — not the loudest voice in the room.",
-    icon: "Search",
+    title: "Function Meets Aesthetic",
+    description: "Balancing beauty and usability seamlessly.",
+    icon: "Sparkles",
     tone: "green",
   },
   {
-    title: "Craft in the details",
-    description:
-      "Spacing, motion, copy, edge cases. The details are the design — they decide whether it feels considered.",
-    icon: "Gem",
+    title: "Simplicity Wins",
+    description: "Removing friction for a smooth, intuitive experience.",
+    icon: "Minimize2",
     tone: "blue",
+  },
+  {
+    title: "Impact-Driven",
+    description: "Every detail adds value and meaning.",
+    icon: "Target",
+    tone: "red",
+  },
+  {
+    title: "Collaboration Matters",
+    description: "Great design happens through teamwork.",
+    icon: "Handshake",
+    tone: "orange",
   },
 ];

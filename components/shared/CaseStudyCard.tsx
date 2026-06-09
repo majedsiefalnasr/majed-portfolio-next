@@ -1,0 +1,89 @@
+import Image from "next/image";
+import Link from "next/link";
+import type { CaseStudy } from "@/types";
+import { cn } from "@/lib/utils";
+
+interface CaseStudyCardProps {
+  caseStudy: CaseStudy;
+  /** `featured` = large hero card; `grid` = compact listing card. */
+  variant?: "featured" | "grid";
+  /** Optional eyebrow label, e.g. "Next case →". Covers the old NextCaseStudyTeaser. */
+  label?: string;
+  className?: string;
+}
+
+/**
+ * Single source for project cards across Home, Case Studies, Who Am I.
+ * Hover handled purely in CSS so this stays a Server Component.
+ */
+export function CaseStudyCard({
+  caseStudy,
+  variant = "grid",
+  label,
+  className,
+}: CaseStudyCardProps) {
+  const { slug, title, description, cover, tags, metrics } = caseStudy;
+  const featured = variant === "featured";
+
+  return (
+    <Link
+      href={`/case-studies/${slug}`}
+      className={cn(
+        "group block overflow-hidden rounded-large bg-surface ring-1 ring-ink/5 transition-shadow duration-300 hover:shadow-xl",
+        className,
+      )}
+    >
+      <article className={cn("flex flex-col", featured ? "gap-8 p-8 md:p-12" : "gap-5 p-6")}>
+        <div className="flex flex-col gap-4">
+          {label && (
+            <span className="text-sm font-medium text-subtle">{label}</span>
+          )}
+          {tags.length > 0 && (
+            <ul className="flex flex-wrap gap-2">
+              {tags.map((tag) => (
+                <li
+                  key={tag}
+                  className="rounded-pill bg-ink/5 px-3 py-1 text-xs font-medium text-body"
+                >
+                  {tag}
+                </li>
+              ))}
+            </ul>
+          )}
+          <h3
+            className={cn(
+              "font-semibold text-title",
+              featured ? "text-h2" : "text-h3",
+            )}
+          >
+            {title}
+          </h3>
+          <p className="max-w-prose text-body">{description}</p>
+
+          {featured && metrics.length > 0 && (
+            <dl className="mt-2 flex flex-wrap gap-x-12 gap-y-4">
+              {metrics.map((m) => (
+                <div key={m.label} className="flex flex-col">
+                  <dt className="order-2 text-sm text-body">{m.label}</dt>
+                  <dd className="order-1 text-lg font-semibold text-title">
+                    {m.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          )}
+        </div>
+
+        <div className="relative aspect-[16/9] w-full overflow-hidden rounded-large bg-background">
+          <Image
+            src={cover}
+            alt={`${title} cover`}
+            fill
+            sizes={featured ? "(min-width: 768px) 800px, 100vw" : "(min-width: 768px) 400px, 100vw"}
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          />
+        </div>
+      </article>
+    </Link>
+  );
+}
