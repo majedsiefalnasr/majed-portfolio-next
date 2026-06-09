@@ -7,7 +7,7 @@ export const testimonials: Testimonial[] = [
       "His ability to deliver innovative design solutions was impressive. The creative approach set the work apart, and meticulous attention to detail ensured a polished, cohesive final product.",
     author: "Charles Chan",
     role: "Senior Design Director, ByteDance",
-    avatar: "/testimonials/charles-chan.svg",
+    avatar: "/testimonials/charles-chan.png",
   },
 ];
 

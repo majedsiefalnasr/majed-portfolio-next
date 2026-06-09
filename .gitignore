@@ -53,3 +53,6 @@ next-env.d.ts
 # Override global ~/.gitignore_global "/lib" — lib/ is app source here
 !/lib
 !/lib/**
+
+# playwright-mcp scratch
+/.playwright-mcp/

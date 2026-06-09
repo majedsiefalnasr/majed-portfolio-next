@@ -46,7 +46,7 @@ export function SectionIntro({
     >
       {withAvatar && (
         <Image
-          src="/avatar.svg"
+          src="/avatar.png"
           alt="Majed Sief Alnasr"
           width={48}
           height={48}

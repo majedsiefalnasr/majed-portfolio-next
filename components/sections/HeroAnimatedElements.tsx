@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, type Variants } from "motion/react";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { siteConfig } from "@/lib/site-config";
@@ -28,9 +29,6 @@ export function HeroAnimatedElements() {
       animate="visible"
       className="flex flex-col items-center gap-6 text-center"
     >
-      <motion.span variants={heroItem} className="text-5xl" aria-hidden>
-        👋
-      </motion.span>
       <motion.h1
         variants={heroItem}
         className="max-w-3xl text-display font-semibold tracking-tight text-title text-balance"
@@ -45,11 +43,28 @@ export function HeroAnimatedElements() {
         intuitive design and smart solutions. Let&apos;s make something great
         together!
       </motion.p>
-      <motion.div variants={heroItem} className="mt-2 flex flex-wrap justify-center gap-3">
-        <CtaLink href={`mailto:${siteConfig.email}`}>Let&apos;s talk</CtaLink>
-        <CtaLink href="/case-studies" variant="secondary">
-          View my work
+      <motion.div
+        variants={heroItem}
+        className="relative mt-2 flex flex-wrap items-center justify-center gap-3"
+      >
+        <CtaLink href="/case-studies">See My Work</CtaLink>
+        <CtaLink href={`mailto:${siteConfig.email}`} variant="secondary">
+          Let&apos;s talk
         </CtaLink>
+        {/* "What's next?" doodle badge (from Figma). */}
+        <span className="pointer-events-none absolute -right-32 top-1 hidden rotate-6 select-none flex-col items-center xl:flex">
+          <span className="rounded-pill bg-warning px-3 py-1 text-xs font-semibold text-ink">
+            What&apos;s next?
+          </span>
+          <Image
+            src="/hero/arrows.svg"
+            alt=""
+            width={56}
+            height={48}
+            aria-hidden
+            className="mt-1 -rotate-12"
+          />
+        </span>
       </motion.div>
     </motion.div>
   );
