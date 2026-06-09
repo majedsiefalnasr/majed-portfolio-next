@@ -20,7 +20,7 @@ export default async function CaseStudiesPage() {
   return (
     <>
       <Section>
-        <SectionIntro headline="Can he help me design something amazing?">
+        <SectionIntro as="h1" headline="Can he help me design something amazing?">
           <p>See for yourself — take a look at the work I have done: 👇</p>
         </SectionIntro>
       </Section>

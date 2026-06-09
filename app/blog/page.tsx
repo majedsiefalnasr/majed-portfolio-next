@@ -16,7 +16,7 @@ export default async function BlogPage() {
   return (
     <>
       <Section>
-        <SectionIntro headline="What does he think about design?">
+        <SectionIntro as="h1" headline="What does he think about design?">
           <p>
             I share insights, ideas, and strategies on design, technology, and
             creativity. Read my latest thoughts: 👇

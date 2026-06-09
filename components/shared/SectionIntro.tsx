@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
+import { MotionReveal } from "@/components/motion/MotionReveal";
 import { cn } from "@/lib/utils";
 
 interface SectionIntroProps {
@@ -12,6 +13,10 @@ interface SectionIntroProps {
   /** Show the avatar pill that opens the conversational rhythm. */
   withAvatar?: boolean;
   align?: "left" | "center";
+  /** Heading level for the headline. Use `h1` for a page's first intro. */
+  as?: "h1" | "h2";
+  /** Reveal on scroll into view. */
+  animate?: boolean;
   className?: string;
 }
 
@@ -26,10 +31,13 @@ export function SectionIntro({
   eyebrow,
   withAvatar = true,
   align = "left",
+  as: Heading = "h2",
+  animate = true,
   className,
 }: SectionIntroProps) {
+  const Wrapper = animate ? MotionReveal : "div";
   return (
-    <div
+    <Wrapper
       className={cn(
         "flex flex-col gap-4",
         align === "center" && "items-center text-center",
@@ -50,12 +58,12 @@ export function SectionIntro({
           {eyebrow}
         </span>
       )}
-      <h2 className="max-w-2xl text-h2 font-semibold text-title text-balance">
+      <Heading className="max-w-2xl text-h2 font-semibold text-title text-balance">
         {headline}
-      </h2>
+      </Heading>
       {children && (
         <div className="max-w-xl text-lead text-body text-pretty">{children}</div>
       )}
-    </div>
+    </Wrapper>
   );
 }
