@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens sourced from Figma (file tH3JfGN8l848pKW7JAwnuB).
+ * Tailwind v4 CSS-first: @theme exposes these as utilities
+ * (e.g. bg-background, text-title, rounded-pill, max-w-container).
+ */
+@theme {
+  /* Backgrounds */
+  --color-background: #f2eee4;
+  --color-surface: #faf7f0;
+  --color-pastel-orange: #ffe7ca;
+  --color-pastel-green: #c5f2d1;
+  --color-pastel-blue: #c4e3ff;
+  --color-pastel-red: #fdcfcf;
+
+  /* Typography */
+  --color-title: #1a1a1a;
+  --color-body: #686868;
+  --color-subtle: #999999;
+  --color-inverse: #e6e6e6;
+  --color-title-inverse: #e6e6e6;
+
+  /* Surfaces / inks for buttons */
+  --color-ink: #000000;
+  --color-paper: #ffffff;
+  --color-warning: #ffd21e;
+
+  /* Fonts — Geist loaded via next/font in layout.tsx */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* Radii */
+  --radius-large: 16px;
+  --radius-pill: 1000px;
+
+  /* Container widths */
+  --container-min: 380px;
+  --container-max: 1116px;
+
+  /* Editorial type scale (mobile-first; fluid via clamp) */
+  --text-display: clamp(2.5rem, 6vw, 4.5rem);
+  --text-display--line-height: 1.05;
+  --text-h1: clamp(2rem, 4.5vw, 3.25rem);
+  --text-h1--line-height: 1.1;
+  --text-h2: clamp(1.5rem, 3vw, 2.25rem);
+  --text-h2--line-height: 1.2;
+  --text-h3: clamp(1.25rem, 2vw, 1.5rem);
+  --text-h3--line-height: 1.3;
+  --text-lead: clamp(1.125rem, 1.5vw, 1.375rem);
+  --text-lead--line-height: 1.6;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-title);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
