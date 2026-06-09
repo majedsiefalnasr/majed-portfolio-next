@@ -1,12 +1,9 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site-config";
-import { caseStudies } from "@/data/case-studies";
+import { getCaseStudySlugs, getBlogSlugs } from "@/lib/content";
 
-/**
- * Static routes + case-study detail pages.
- * Blog detail routes get added once the MDX blog index lands (Tier 3).
- */
-export default function sitemap(): MetadataRoute.Sitemap {
+/** Static routes + case-study and blog detail pages, sourced from content/. */
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
   const staticRoutes = ["", "/who-am-i", "/case-studies", "/blog"].map(
     (path) => ({
@@ -17,12 +14,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }),
   );
 
-  const caseStudyRoutes = caseStudies.map((cs) => ({
-    url: `${siteConfig.url}/case-studies/${cs.slug}`,
+  const [caseStudySlugs, blogSlugs] = await Promise.all([
+    getCaseStudySlugs(),
+    getBlogSlugs(),
+  ]);
+
+  const detailRoutes = [
+    ...caseStudySlugs.map((slug) => `/case-studies/${slug}`),
+    ...blogSlugs.map((slug) => `/blog/${slug}`),
+  ].map((path) => ({
+    url: `${siteConfig.url}${path}`,
     lastModified: now,
     changeFrequency: "yearly" as const,
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...caseStudyRoutes];
+  return [...staticRoutes, ...detailRoutes];
 }
