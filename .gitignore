@@ -43,3 +43,7 @@ next-env.d.ts
 # BMAD agent tooling (regenerable mirrors — not application source)
 .agents/
 .claude/
+
+# Override global ~/.gitignore_global "/lib" — lib/ is app source here
+!/lib
+!/lib/**
