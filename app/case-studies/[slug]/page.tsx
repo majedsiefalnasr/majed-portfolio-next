@@ -57,7 +57,7 @@ export default async function CaseStudyDetailPage({
               {frontmatter.tags.map((tag) => (
                 <li
                   key={tag}
-                  className="rounded-pill bg-ink/5 px-3 py-1 text-xs font-medium text-body"
+                  className="rounded-pill bg-ink/10 px-3 py-1 text-xs font-medium text-title"
                 >
                   {tag}
                 </li>

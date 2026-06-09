@@ -12,9 +12,11 @@ const heroContainer: Variants = {
   visible: { transition: { staggerChildren: 0.06 } },
 };
 
+// No opacity fade on the headline — it's the LCP element, so it must paint
+// immediately. Animate position only for a subtle settle.
 const heroItem: Variants = {
-  hidden: { opacity: 0, y: 12 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut" } },
+  hidden: { y: 10 },
+  visible: { y: 0, transition: { duration: 0.35, ease: "easeOut" } },
 };
 
 /**

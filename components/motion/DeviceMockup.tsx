@@ -35,7 +35,7 @@ export function DeviceMockup({ children, url = "zidney.com", className }: Device
             <span className="size-3 rounded-full bg-pastel-orange" />
             <span className="size-3 rounded-full bg-pastel-green" />
           </div>
-          <div className="mx-auto w-full max-w-md truncate rounded-pill bg-background px-4 py-1 text-center text-xs text-subtle">
+          <div className="mx-auto w-full max-w-md truncate rounded-pill bg-background px-4 py-1 text-center text-xs text-body">
             {url}
           </div>
         </div>
