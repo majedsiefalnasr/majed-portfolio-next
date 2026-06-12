@@ -46,14 +46,30 @@ next-env.d.ts
 /blob-report/
 /playwright/.cache/
 
-# BMAD agent tooling (regenerable mirrors — not application source)
-.agents/
-.claude/
+# playwright-mcp scratch
+/.playwright-mcp/
+/.playwright-cli/
 
 # Override global ~/.gitignore_global "/lib" — lib/ is app source here
 !/lib
 !/lib/**
 
-# playwright-mcp scratch
-/.playwright-mcp/
-/.playwright-cli/
+# Design resources
+design-resources/
+design-artifacts/
+
+# AI agent tooling (regenerable mirrors — not application source)
+.agents/
+.claude/
+
+# impeccable (design system)
+.impeccable/
+
+# bmad
+_bmad/
+_bmad-output/
+design-artifacts/
+design-resources/
+
+# bmad output
+_bmad-output/
