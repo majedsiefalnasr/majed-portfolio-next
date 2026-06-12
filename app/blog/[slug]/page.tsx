@@ -5,8 +5,10 @@ import { Section } from "@/components/layout/Section";
 import { Mdx } from "@/components/mdx/Mdx";
 import { PageFooterSections } from "@/components/layout/PageFooterSections";
 import { getBlogPost, getBlogSlugs } from "@/lib/content";
+import { features } from "@/lib/features";
 
 export async function generateStaticParams() {
+  if (!features.blog) return [];
   const slugs = await getBlogSlugs();
   return slugs.map((slug) => ({ slug }));
 }
@@ -39,6 +41,7 @@ export default async function BlogDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  if (!features.blog) notFound();
   const entry = await getBlogPost(slug);
   if (!entry) notFound();
 

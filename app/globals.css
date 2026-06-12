@@ -3,7 +3,7 @@
 /*
  * Design tokens sourced from Figma (file tH3JfGN8l848pKW7JAwnuB).
  * Tailwind v4 CSS-first: @theme exposes these as utilities
- * (e.g. bg-background, text-title, rounded-pill, max-w-container).
+ * (e.g. bg-background, text-title, rounded-pill, max-w-page).
  */
 @theme {
   /* Backgrounds */
@@ -13,6 +13,12 @@
   --color-pastel-green: #c5f2d1;
   --color-pastel-blue: #c4e3ff;
   --color-pastel-red: #fdcfcf;
+  --color-pastel-amber: #f7d98a;
+
+  /* Design-approach tall cards (Figma "Why does his approach work?") */
+  --color-accent-violet: #c9bdf5;
+  --color-accent-plum: #382c5a;
+  --color-accent-blush: #f7d7da;
 
   /* Typography */
   --color-title: #1a1a1a;
@@ -25,6 +31,8 @@
   --color-ink: #000000;
   --color-paper: #ffffff;
   --color-warning: #ffd21e;
+  /* Availability status dot (always paired with text, never meaning alone). */
+  --color-positive: #2f9e44;
 
   /* Fonts — Geist loaded via next/font in layout.tsx */
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
@@ -32,23 +40,64 @@
 
   /* Radii */
   --radius-large: 16px;
+  --radius-card: 24px;
   --radius-pill: 1000px;
 
-  /* Container widths */
-  --container-min: 380px;
-  --container-max: 1116px;
+  /* Boxed content width (Figma: 1512 frame with ~267px side margins).
+     Note: the key must not be "max"/"min" — those collide with the built-in
+     max-content/min-content utilities, which is how the old --container-max
+     silently produced a no-op `max-w-container` class. */
+  --container-page: 980px;
+
+  /* Hero waving hand (origin set on the element). */
+  --animate-wave: wave 2.4s ease-in-out infinite;
+  @keyframes wave {
+    0%,
+    40%,
+    100% {
+      transform: rotate(0deg);
+    }
+    10% {
+      transform: rotate(16deg);
+    }
+    20% {
+      transform: rotate(-9deg);
+    }
+    30% {
+      transform: rotate(12deg);
+    }
+  }
+
+  /* "What's next?" doodle arrows nudging toward the CTAs. */
+  --animate-nudge: nudge 1.5s ease-in-out infinite;
+  @keyframes nudge {
+    0%,
+    100% {
+      transform: translateX(0) scaleX(-1);
+    }
+    50% {
+      transform: translateX(-7px) scaleX(-1);
+    }
+  }
 
   /* Editorial type scale (mobile-first; fluid via clamp) */
   --text-display: clamp(2.5rem, 6vw, 4.5rem);
   --text-display--line-height: 1.05;
-  --text-h1: clamp(2rem, 4.5vw, 3.25rem);
-  --text-h1--line-height: 1.1;
-  --text-h2: clamp(1.5rem, 3vw, 2.25rem);
-  --text-h2--line-height: 1.2;
+  --text-h1: clamp(2.5rem, 6vw, 5rem);
+  --text-h1--line-height: 1.05;
+  --text-h2: clamp(1.75rem, 3.5vw, 2.75rem);
+  --text-h2--line-height: 1.1;
+  /* Conversational question headlines (Figma home sections, ~64px). */
+  --text-question: clamp(2.25rem, 4.3vw, 4rem);
+  --text-question--line-height: 1.12;
   --text-h3: clamp(1.25rem, 2vw, 1.5rem);
   --text-h3--line-height: 1.3;
   --text-lead: clamp(1.125rem, 1.5vw, 1.375rem);
   --text-lead--line-height: 1.6;
+  /* Supporting line under question-headlines: a step up from lead so the
+     answer reads at a glance while the headline stays dominant. */
+  --text-intro: clamp(1.25rem, 1.2vw, 1.625rem);
+  --text-intro--line-height: 1.5;
 }
 
 html {
@@ -66,5 +115,26 @@ body {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+}
+
+/* FAQ accordion: animate <details> expansion where the browser supports
+   sizing keyword interpolation; everywhere else it opens instantly. */
+.faq-item {
+  interpolate-size: allow-keywords;
+}
+.faq-item::details-content {
+  block-size: 0;
+  overflow-y: clip;
+  transition:
+    block-size 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+    content-visibility 0.3s allow-discrete;
+}
+.faq-item[open]::details-content {
+  block-size: auto;
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq-item::details-content {
+    transition: none;
   }
 }

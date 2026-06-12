@@ -32,5 +32,9 @@ export const staggerContainer: Variants = {
   },
 };
 
-/** Shared viewport config so reveals fire once, slightly before fully in view. */
-export const viewportOnce = { once: true, amount: 0.3 } as const;
+/**
+ * Shared viewport config so reveals fire once, slightly before fully in view.
+ * amount is low so tall sections on short viewports still cross the
+ * threshold instead of staying at opacity 0.
+ */
+export const viewportOnce = { once: true, amount: 0.1 } as const;

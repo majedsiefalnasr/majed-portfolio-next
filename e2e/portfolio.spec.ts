@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { features } from "../lib/features";
 
 test.describe("Portfolio", () => {
   test("home loads with hero and key sections", async ({ page }) => {
@@ -6,18 +7,20 @@ test.describe("Portfolio", () => {
     await expect(
       page.getByRole("heading", {
         level: 1,
-        name: /Let.s Design Something Amazing/i,
+        name: /Design that makes your product click/i,
       }),
     ).toBeVisible();
     await expect(
-      page.getByRole("heading", { name: /What services does he offer/i }),
+      page.getByRole("heading", { name: /How can he help your product/i }),
     ).toBeVisible();
-    await expect(page.getByText(/Charles Chan/)).toBeVisible();
+    await expect(page.getByText(/Charles Chan/).first()).toBeVisible();
   });
 
   test("primary navigation works", async ({ page }) => {
     await page.goto("/");
-    await page.getByRole("link", { name: "Case studies" }).first().click();
+    // Page links live behind the menu button at every breakpoint.
+    await page.getByRole("button", { name: "Open menu" }).click();
+    await page.getByRole("link", { name: "Case Studies", exact: true }).click();
     await expect(page).toHaveURL(/\/case-studies$/);
     await expect(
       page.getByRole("heading", { level: 1 }),
@@ -35,6 +38,7 @@ test.describe("Portfolio", () => {
   });
 
   test("blog index lists posts and detail renders", async ({ page }) => {
+    test.skip(!features.blog, "blog is feature-flagged off");
     await page.goto("/blog");
     const firstPost = page
       .getByRole("link", { name: /Designing for clarity/i })
@@ -48,10 +52,56 @@ test.describe("Portfolio", () => {
   });
 
   test("newsletter form shows success state", async ({ page }) => {
+    test.skip(!features.newsletter, "newsletter is feature-flagged off");
     await page.goto("/who-am-i");
     await page.getByPlaceholder("Email address").fill("test@example.com");
     await page.getByRole("button", { name: /Subscribe/i }).click();
     await expect(page.getByText(/you.re on the list/i)).toBeVisible();
+  });
+
+  test("flagship case study renders all template sections", async ({
+    page,
+  }) => {
+    await page.goto("/case-studies/atlas-freight");
+    await expect(
+      page.getByRole("heading", { level: 1, name: "Atlas Freight" }),
+    ).toBeVisible();
+    for (const section of [
+      "Executive summary",
+      "Research insights",
+      "Design decisions",
+      "Validation and testing",
+      "Lessons learned",
+    ]) {
+      await expect(
+        page.getByRole("heading", { name: section }),
+      ).toBeVisible();
+    }
+    // Demo disclosure must stay until real client work replaces it.
+    await expect(page.getByText(/Flagship demo case study/i)).toBeVisible();
+  });
+
+  test("booking CTA is wired", async ({ page }) => {
+    await page.goto("/");
+    const booking = page.locator("#booking");
+    await expect(
+      booking.getByRole("link", { name: "Book a 20-minute intro call" }),
+    ).toHaveAttribute("href", /.+/);
+    // Scoped to #booking: the ContactCTA has its own "Email me" link.
+    await expect(
+      booking.getByRole("link", { name: "Email me", exact: true }),
+    ).toHaveAttribute("href", /^mailto:/);
+  });
+
+  test("CV and resume downloads are wired", async ({ page }) => {
+    test.skip(!features.cvDownloads, "CV downloads are feature-flagged off");
+    await page.goto("/");
+    await expect(
+      page.getByRole("link", { name: /Download CV/i }).first(),
+    ).toHaveAttribute("href", "/cv.pdf");
+    await expect(
+      page.getByRole("link", { name: /Download Resume/i }).first(),
+    ).toHaveAttribute("href", "/resume.pdf");
   });
 
   test("contact CTA exposes mailto", async ({ page }) => {

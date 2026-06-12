@@ -11,7 +11,7 @@ export function BlogGrid({ posts }: BlogGridProps) {
     return <p className="text-body">No posts yet — check back soon.</p>;
   }
   return (
-    <ul className="grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+    <ul className="grid gap-x-6 gap-y-16 md:grid-cols-2">
       {posts.map((post) => (
         <li key={post.slug}>
           <BlogCard post={post} />

@@ -16,7 +16,7 @@ export function ProcessSteps() {
           className="relative flex-1 border-l-2 border-ink/10 pl-6 md:border-l-0 md:border-t-2 md:pl-0 md:pt-6"
         >
           <span className="absolute -left-[9px] top-0 flex size-4 items-center justify-center rounded-full bg-ink md:-top-[9px] md:left-0" aria-hidden />
-          <span className="text-sm font-medium text-subtle">
+          <span className="text-sm font-medium text-body">
             {String(i + 1).padStart(2, "0")}
           </span>
           <h3 className="mt-1 text-h3 font-semibold text-title">{step.title}</h3>

@@ -1,69 +1,72 @@
-import Image from "next/image";
 import type { ReactNode } from "react";
-import { MotionReveal } from "@/components/motion/MotionReveal";
+import { TextIntro } from "@/components/motion/TextIntro";
 import { cn } from "@/lib/utils";
 
 interface SectionIntroProps {
   /** The conversational "question" headline. */
   headline: ReactNode;
-  /** Supporting body paragraph(s). */
+  /** Supporting line, rendered as plain lead text under the headline. */
   children?: ReactNode;
-  /** Small label above the headline (e.g. section eyebrow). */
-  eyebrow?: string;
-  /** Show the avatar pill that opens the conversational rhythm. */
-  withAvatar?: boolean;
   align?: "left" | "center";
   /** Heading level for the headline. Use `h1` for a page's first intro. */
   as?: "h1" | "h2";
-  /** Reveal on scroll into view. */
+  /** Play the rising-text choreography on scroll into view. */
   animate?: boolean;
   className?: string;
 }
 
 /**
- * The conversational intro pattern used across nearly every section:
- * avatar + question headline + body. Single source prevents markup drift
- * (brainstorm: appears 8–10× site-wide).
+ * The conversational intro that opens nearly every section: a bold question
+ * headline answered by a plain supporting line, both rising in word by word
+ * (TextIntro). Single source so the rhythm stays identical site-wide.
  */
 export function SectionIntro({
   headline,
   children,
-  eyebrow,
-  withAvatar = true,
   align = "left",
   as: Heading = "h2",
   animate = true,
   className,
 }: SectionIntroProps) {
-  const Wrapper = animate ? MotionReveal : "div";
+  if (animate) {
+    return (
+      <TextIntro headline={headline} align={align} as={Heading} className={className}>
+        {children}
+      </TextIntro>
+    );
+  }
+
+  const centered = align === "center";
   return (
-    <Wrapper
+    <div
       className={cn(
-        "flex flex-col gap-4",
-        align === "center" && "items-center text-center",
+        "flex flex-col gap-5 md:gap-7",
+        centered && "items-center text-center",
         className,
       )}
     >
-      {withAvatar && (
-        <Image
-          src="/avatar.png"
-          alt="Majed Sief Alnasr"
-          width={48}
-          height={48}
-          className="size-12 rounded-pill object-cover"
-        />
-      )}
-      {eyebrow && (
-        <span className="text-sm font-medium uppercase tracking-wide text-subtle">
-          {eyebrow}
-        </span>
-      )}
-      <Heading className="max-w-2xl text-h2 font-semibold text-title text-balance">
+      <Heading
+        className={cn(
+          "text-balance tracking-tight text-title",
+          // Page intros sit at the section scale (Figma ~44px); question
+          // headlines carry the conversational scale.
+          Heading === "h1"
+            ? "text-h2 max-w-2xl font-bold"
+            : "text-question max-w-3xl font-bold",
+        )}
+      >
         {headline}
       </Heading>
       {children && (
-        <div className="max-w-xl text-lead text-body text-pretty">{children}</div>
+        <p
+          className={cn(
+            "max-w-[44rem] text-pretty text-intro text-body [&_strong]:font-semibold [&_strong]:text-title",
+            centered && "mx-auto",
+          )}
+        >
+          {children}
+        </p>
       )}
-    </Wrapper>
+    </div>
   );
 }

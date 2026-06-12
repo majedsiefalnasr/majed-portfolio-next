@@ -13,7 +13,7 @@ interface SectionProps {
 }
 
 const widthClass = {
-  default: "max-w-container",
+  default: "max-w-page",
   prose: "max-w-[680px]",
 } as const;
 
@@ -29,7 +29,17 @@ export function Section({
   as: Tag = "section",
 }: SectionProps) {
   return (
-    <Tag id={id} className={cn("w-full px-5 py-16 sm:px-8 md:py-24", className)}>
+    <Tag
+      id={id}
+      // Fluid vertical rhythm: ~56px on mobile up to ~112px on wide screens.
+      // Tighter than the Figma's literal 200px so the page scans in a few
+      // folds instead of yawning between sections. `className` still wins for
+      // per-section overrides (pt-0, border-t).
+      className={cn(
+        "w-full px-5 py-[clamp(3.5rem,7vw,7rem)] sm:px-8",
+        className,
+      )}
+    >
       <div className={cn("mx-auto w-full", widthClass[width])}>{children}</div>
     </Tag>
   );

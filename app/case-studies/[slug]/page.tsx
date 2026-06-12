@@ -3,7 +3,9 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Section } from "@/components/layout/Section";
 import { Mdx } from "@/components/mdx/Mdx";
-import { CaseStudyCard } from "@/components/shared/CaseStudyCard";
+import { NextCaseTeaser } from "@/components/shared/NextCaseTeaser";
+import { CaseHeroSlider } from "@/components/sections/CaseHeroSlider";
+import { ToolIcon } from "@/components/shared/ToolIcon";
 import { PageFooterSections } from "@/components/layout/PageFooterSections";
 import {
   getCaseStudy,
@@ -46,32 +48,49 @@ export default async function CaseStudyDetailPage({
   return (
     <>
       <Section width="prose">
-        <nav className="mb-8 text-sm text-body">
+        <nav className="mb-8 flex items-center gap-2 text-sm text-body">
           <Link href="/case-studies" className="hover:text-title">
-            ← Case studies
+            Case Studies
           </Link>
+          <span aria-hidden>›</span>
+          <span className="text-title">{frontmatter.title}</span>
         </nav>
-        <header className="flex flex-col gap-4">
-          {frontmatter.tags?.length > 0 && (
-            <ul className="flex flex-wrap gap-2">
-              {frontmatter.tags.map((tag) => (
-                <li
-                  key={tag}
-                  className="rounded-pill bg-ink/10 px-3 py-1 text-xs font-medium text-title"
-                >
-                  {tag}
-                </li>
-              ))}
-            </ul>
-          )}
-          <h1 className="text-h1 font-semibold text-title text-balance">
+        <header className="flex flex-col gap-8">
+          <h1 className="text-h1 font-bold text-title text-balance">
             {frontmatter.title}
           </h1>
-          <p className="text-lead text-body">{frontmatter.description}</p>
+
+          {/* Info row: Location/Year · Role · Tools */}
+          <div className="flex flex-wrap gap-x-16 gap-y-6">
+            {frontmatter.locationYear && (
+              <div className="flex flex-col gap-2">
+                <span className="text-sm text-body" >Location &amp; year</span>
+                <span className="text-base font-medium text-title" >{frontmatter.locationYear}</span>
+              </div>
+            )}
+            {frontmatter.role && (
+              <div className="flex flex-col gap-2">
+                <span className="text-sm text-body" >Role / Services</span>
+                <span className="text-base font-medium text-title" >{frontmatter.role}</span>
+              </div>
+            )}
+            {frontmatter.tools && frontmatter.tools.length > 0 && (
+              <div className="flex flex-col gap-2">
+                <span className="text-sm text-body" >Tools Used</span>
+                <div className="flex flex-wrap gap-2">
+                  {frontmatter.tools.map((tool) => (
+                    <ToolIcon key={tool} tool={tool} size={36} />
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
         </header>
       </Section>
 
-      <Section width="prose" className="pt-0">
+      <CaseHeroSlider caseStudy={{ ...frontmatter, slug }} />
+
+      <Section width="prose">
         <article>
           <Mdx source={body} />
         </article>
@@ -79,11 +98,7 @@ export default async function CaseStudyDetailPage({
 
       {next && (
         <Section>
-          <CaseStudyCard
-            caseStudy={next}
-            variant="featured"
-            label="Next case →"
-          />
+          <NextCaseTeaser caseStudy={next} />
         </Section>
       )}
 

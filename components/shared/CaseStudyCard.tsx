@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CaseStudy } from "@/types";
+import { DemoTag } from "@/components/shared/DemoTag";
 import { cn } from "@/lib/utils";
 
 interface CaseStudyCardProps {
@@ -29,17 +30,20 @@ export function CaseStudyCard({
     <Link
       href={`/case-studies/${slug}`}
       className={cn(
-        "group block overflow-hidden rounded-large bg-surface ring-1 ring-ink/5 transition-shadow duration-300 hover:shadow-xl",
+        "group block overflow-hidden rounded-card bg-surface ring-1 ring-ink/5 transition-shadow duration-300 hover:shadow-xl",
         className,
       )}
     >
       <article className={cn("flex flex-col", featured ? "gap-8 p-8 md:p-12" : "gap-5 p-6")}>
         <div className="flex flex-col gap-4">
           {label && (
-            <span className="text-sm font-medium text-subtle">{label}</span>
+            <span className="text-sm font-medium text-body">{label}</span>
           )}
-          {tags.length > 0 && (
+          {(tags.length > 0 || caseStudy.demo) && (
             <ul className="flex flex-wrap gap-2">
+              {caseStudy.demo && (
+                <DemoTag as="li" className="px-3 py-1 text-xs" />
+              )}
               {tags.map((tag) => (
                 <li
                   key={tag}
@@ -74,7 +78,7 @@ export function CaseStudyCard({
           )}
         </div>
 
-        <div className="relative aspect-[16/9] w-full overflow-hidden rounded-large bg-background">
+        <div className="relative aspect-[16/9] w-full overflow-hidden rounded-card bg-background">
           <Image
             src={cover}
             alt={`${title} cover`}

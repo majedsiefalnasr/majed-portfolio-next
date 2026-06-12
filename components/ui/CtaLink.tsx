@@ -9,7 +9,7 @@ interface CtaLinkProps extends ComponentProps<typeof Link> {
 }
 
 const base =
-  "inline-flex h-[50px] items-center justify-center rounded-pill px-7 text-sm font-medium transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink";
+  "inline-flex h-[54px] items-center justify-center rounded-pill px-8 text-base font-medium transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink";
 
 const variants: Record<Variant, string> = {
   primary: "bg-ink text-paper hover:bg-ink/90",

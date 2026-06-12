@@ -20,15 +20,18 @@ function formatDate(iso: string) {
 
 /** Single source for blog cards on Home ("Insights") and the Blog grid. */
 export function BlogCard({ post, variant = "grid", className }: BlogCardProps) {
-  const { slug, title, excerpt, category, date, cover } = post;
+  const { slug, title, category, date, cover } = post;
   const featured = variant === "featured";
 
   return (
     <Link
       href={`/blog/${slug}`}
-      className={cn("group flex flex-col gap-4", className)}
+      className={cn("group flex flex-col gap-6", className)}
     >
-      <div className="relative aspect-[16/10] w-full overflow-hidden rounded-large bg-surface">
+      <div
+        className="relative w-full overflow-hidden rounded-card bg-surface"
+        style={{ height: featured ? "460px" : "286px" }}
+      >
         <Image
           src={cover}
           alt={`${title} cover`}
@@ -37,20 +40,21 @@ export function BlogCard({ post, variant = "grid", className }: BlogCardProps) {
           className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
         />
       </div>
-      <div className="flex flex-col gap-2">
-        <div className="flex items-center justify-between text-sm text-body">
-          <span className="font-medium">{category}</span>
-          <time dateTime={date}>{formatDate(date)}</time>
+      <div className="flex flex-col gap-3">
+        <div className="flex items-center justify-between gap-4">
+          <span className="text-lg font-semibold text-title">{category}</span>
+          <time dateTime={date} className="text-sm text-body">
+            {formatDate(date)}
+          </time>
         </div>
         <h3
           className={cn(
             "font-semibold text-title transition-colors group-hover:text-ink",
-            featured ? "text-h2" : "text-h3",
+            featured ? "text-[2rem] leading-snug" : "text-h3",
           )}
         >
           {title}
         </h3>
-        {featured && <p className="max-w-prose text-body">{excerpt}</p>}
       </div>
     </Link>
   );

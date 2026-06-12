@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/layout/Section";
 import { SectionIntro } from "@/components/shared/SectionIntro";
-import { CaseStudyCard } from "@/components/shared/CaseStudyCard";
+import { CaseStudyRow } from "@/components/shared/CaseStudyRow";
 import { TestimonialBlock } from "@/components/shared/TestimonialBlock";
 import { PageFooterSections } from "@/components/layout/PageFooterSections";
 import { getAllCaseStudies } from "@/lib/content";
@@ -15,39 +15,40 @@ export const metadata: Metadata = {
 
 export default async function CaseStudiesPage() {
   const caseStudies = await getAllCaseStudies();
-  const [featured, ...rest] = caseStudies;
 
   return (
     <>
       <Section>
-        <SectionIntro as="h1" headline="Can he help me design something amazing?">
-          <p>See for yourself — take a look at the work I have done: 👇</p>
-        </SectionIntro>
+        <SectionIntro
+          as="h1"
+          align="center"
+          headline="Take a look at real-world examples of how he tackles challenges with smart, user-focused design"
+        />
+        <div className="mt-10 flex flex-col items-center gap-3">
+          <div className="flex size-[50px] items-center justify-center rounded-pill bg-surface ring-1 ring-ink/10">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden className="text-body"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+          </div>
+          <span className="text-sm text-body">Scroll to explore</span>
+        </div>
       </Section>
 
-      {featured && (
-        <Section className="pt-0">
-          <CaseStudyCard caseStudy={featured} variant="featured" />
-        </Section>
-      )}
+      {caseStudies.map((cs) => (
+        <CaseStudyRow key={cs.slug} caseStudy={cs} />
+      ))}
 
-      {rest.length > 0 && (
-        <Section className="pt-0">
-          <div className="grid gap-8 md:grid-cols-2">
-            {rest.map((cs) => (
-              <CaseStudyCard key={cs.slug} caseStudy={cs} variant="grid" />
-            ))}
+      {testimonials[0] && (
+        <Section>
+          <SectionIntro headline="Can I trust him with my project?">
+            <strong>Good design speaks</strong> for itself, but feedback matters
+            too. Here is what working with me is like: 👇
+          </SectionIntro>
+          <div className="mt-12">
+            <TestimonialBlock testimonial={testimonials[0]} />
           </div>
         </Section>
       )}
 
-      {testimonials[0] && (
-        <Section>
-          <TestimonialBlock testimonial={testimonials[0]} />
-        </Section>
-      )}
-
-      <PageFooterSections />
+      <PageFooterSections withNewsletter={false} />
     </>
   );
 }

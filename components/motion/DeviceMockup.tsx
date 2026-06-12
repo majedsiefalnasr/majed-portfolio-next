@@ -1,7 +1,7 @@
 "use client";
 
 import { Children, useState, type ReactNode } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { CarouselButton } from "@/components/ui/CarouselButton";
 import { cn } from "@/lib/utils";
 
 interface DeviceMockupProps {
@@ -27,9 +27,18 @@ export function DeviceMockup({ children, url = "zidney.com", className }: Device
 
   return (
     <div className={cn("relative", className)}>
-      <div className="overflow-hidden rounded-large bg-surface shadow-2xl ring-1 ring-ink/5">
+      {/* Soft floor glow + light-line under the frame (Figma "next case" depth). */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-6 -bottom-3 -z-10 h-16 rounded-[50%] bg-ink/40 blur-[55px]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-ink/40 to-transparent"
+      />
+      <div className="relative overflow-hidden rounded-card bg-surface shadow-2xl ring-1 ring-ink/5">
         {/* Browser chrome */}
-        <div className="flex items-center gap-3 border-b border-ink/5 px-4 py-3">
+        <div className="flex items-center gap-3 px-4 py-3">
           <div className="flex gap-1.5" aria-hidden>
             <span className="size-3 rounded-full bg-pastel-red" />
             <span className="size-3 rounded-full bg-pastel-orange" />
@@ -57,26 +66,12 @@ export function DeviceMockup({ children, url = "zidney.com", className }: Device
       </div>
 
       {multiple && (
-        <div className="mt-4 flex items-center justify-center gap-3">
-          <button
-            type="button"
-            aria-label="Previous slide"
-            onClick={() => go(-1)}
-            className="inline-flex size-11 items-center justify-center rounded-pill bg-surface ring-1 ring-ink/10 transition-colors hover:bg-ink/5"
-          >
-            <ChevronLeft className="size-5" aria-hidden />
-          </button>
+        <div className="mt-6 flex items-center justify-center gap-3">
+          <CarouselButton direction="prev" onClick={() => go(-1)} />
           <span className="text-sm tabular-nums text-body">
             {index + 1} / {slides.length}
           </span>
-          <button
-            type="button"
-            aria-label="Next slide"
-            onClick={() => go(1)}
-            className="inline-flex size-11 items-center justify-center rounded-pill bg-surface ring-1 ring-ink/10 transition-colors hover:bg-ink/5"
-          >
-            <ChevronRight className="size-5" aria-hidden />
-          </button>
+          <CarouselButton direction="next" onClick={() => go(1)} />
         </div>
       )}
     </div>

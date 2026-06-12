@@ -23,7 +23,7 @@ export function NewsletterCTA() {
   }
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col items-center gap-8 text-center">
       <h2 className="text-h2 font-semibold text-title">📩 Join the List</h2>
       {status === "done" ? (
         <p className="flex items-center gap-2 text-lead text-body">
@@ -33,7 +33,8 @@ export function NewsletterCTA() {
       ) : (
         <form
           onSubmit={handleSubmit}
-          className="flex w-full max-w-xl items-center gap-2 rounded-pill bg-surface p-2 ring-1 ring-ink/10 focus-within:ring-ink/30"
+          // Figma: 800x98 pill, 24px padding, 50px button.
+          className="flex w-full max-w-[50rem] items-center gap-2 rounded-pill bg-surface p-3 ring-1 ring-ink/10 focus-within:ring-ink/30 sm:p-6"
         >
           <label htmlFor="newsletter-email" className="sr-only">
             Email address
@@ -45,7 +46,7 @@ export function NewsletterCTA() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email address"
-            className="min-w-0 flex-1 bg-transparent px-4 text-body outline-none placeholder:text-subtle"
+            className="min-w-0 flex-1 bg-transparent px-4 text-body outline-none placeholder:text-body sm:text-xl"
           />
           <button
             type="submit"

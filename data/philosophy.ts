@@ -13,7 +13,7 @@ export const philosophy: PhilosophyItem[] = [
   },
   {
     title: "Function Meets Aesthetic",
-    description: "Balancing beauty and usability seamlessly.",
+    description: "Beauty and usability, never one at the other's expense.",
     icon: "Sparkles",
     tone: "green",
   },

@@ -16,4 +16,6 @@ export const pullQuote = {
   quote: "Quality means doing it right when no one is looking.",
   author: "Henry Ford",
   role: "American industrialist and business magnate",
+  // 1919 portrait, public domain (Wikimedia Commons).
+  avatar: "/testimonials/henry-ford.jpg",
 } as const;

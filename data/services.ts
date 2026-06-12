@@ -6,7 +6,7 @@ export const services: Service[] = [
     slug: "ux-ui-design",
     title: "UX/UI Design for Mobile & Web",
     description:
-      "Need a sleek, functional design? He creates seamless experiences tailored for your users.",
+      "Need a clean, functional design? He shapes interfaces your users move through without stopping to think.",
     icon: "LayoutDashboard",
   },
   {

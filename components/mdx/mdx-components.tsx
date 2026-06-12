@@ -1,9 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { MDXComponents } from "next-mdx-remote-client/rsc";
 import { DeviceMockup } from "@/components/motion/DeviceMockup";
 import { ImageGallery } from "@/components/mdx/ImageGallery";
 import { MetricBlock } from "@/components/mdx/MetricBlock";
+import { ZoomImage } from "@/components/mdx/ZoomImage";
 
 /**
  * Global MDX component map: editorial prose styles + custom blocks usable
@@ -37,9 +37,7 @@ export const mdxComponents: MDXComponents = {
     />
   ),
   img: ({ src = "", alt = "" }) => (
-    <span className="relative my-8 block aspect-[16/9] overflow-hidden rounded-large bg-surface">
-      <Image src={src} alt={alt} fill sizes="(min-width: 768px) 680px, 100vw" className="object-cover" />
-    </span>
+    <ZoomImage src={typeof src === "string" ? src : ""} alt={alt} />
   ),
   // Custom blocks
   DeviceMockup,

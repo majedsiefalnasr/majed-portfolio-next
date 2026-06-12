@@ -1,6 +1,7 @@
 import { Section } from "@/components/layout/Section";
 import { ContactCTA } from "@/components/shared/ContactCTA";
 import { NewsletterCTA } from "@/components/shared/NewsletterCTA";
+import { features } from "@/lib/features";
 
 interface PageFooterSectionsProps {
   /** Hide the newsletter on pages where it doesn't belong. */
@@ -17,12 +18,12 @@ export function PageFooterSections({
 }: PageFooterSectionsProps) {
   return (
     <>
-      {withNewsletter && (
-        <Section className="border-t border-ink/5">
+      {withNewsletter && features.newsletter && (
+        <Section>
           <NewsletterCTA />
         </Section>
       )}
-      <Section className="border-t border-ink/5">
+      <Section>
         <ContactCTA />
       </Section>
     </>
