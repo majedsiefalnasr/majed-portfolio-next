@@ -275,9 +275,10 @@ export function Lightbox({
           x,
           y,
           aspectRatio: ratio,
-          width: ratio ? "auto" : "100%",
+          width: ratio ? `min(100%, calc(100dvh * ${ratio}))` : "100%",
+          maxHeight: "100%",
         }}
-        className="relative h-full max-w-full overflow-hidden rounded-large bg-background outline-none ring-1 ring-ink/10"
+        className="relative max-h-full max-w-full overflow-hidden rounded-large bg-background outline-none ring-1 ring-ink/10"
       >
         <AnimatePresence mode="popLayout" initial={false}>
           <motion.div
