@@ -46,7 +46,7 @@ function ProofCardView({ card }: { card: ProofCard }) {
         <span>{card.kicker}</span>
         {card.demo && (
           <span
-            title="Demonstration data from the flagship demo case study"
+            title="Demonstration data from the flagship demo project"
             className="ml-auto rounded-pill bg-paper px-2.5 py-0.5 font-mono text-[11px] font-medium text-body ring-1 ring-ink/10"
           >
             demo data

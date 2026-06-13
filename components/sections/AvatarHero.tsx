@@ -72,7 +72,7 @@ export function AvatarHero() {
           products into ones people understand the moment they open them.
         </p>
         <div className="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-3">
-          <CtaLink href="/case-studies">See my work</CtaLink>
+          <CtaLink href="/work">See my work</CtaLink>
           <CtaLink href={siteConfig.links.bookingEmail} variant="secondary">
             Let&apos;s talk
           </CtaLink>

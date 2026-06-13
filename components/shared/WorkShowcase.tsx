@@ -1,17 +1,17 @@
 import Link from "next/link";
-import type { CaseStudy } from "@/types";
+import type { Work } from "@/types";
 import { cn } from "@/lib/utils";
 import { BrowserMock } from "@/components/shared/BrowserMock";
-import { CaseInfoRow } from "@/components/shared/CaseInfoRow";
+import { WorkInfoRow } from "@/components/shared/WorkInfoRow";
 import { DemoTag } from "@/components/shared/DemoTag";
 
 type MetricsPlacement = "info" | "inside" | "below";
 
-interface CaseStudyShowcaseProps {
-  caseStudy: CaseStudy;
-  /** Browser-frame screenshot (defaults to the case cover). */
+interface WorkShowcaseProps {
+  work: Work;
+  /** Browser-frame screenshot (defaults to the work cover). */
   screenshot?: string;
-  /** Small eyebrow above the title, e.g. "Next case". */
+  /** Small eyebrow above the title, e.g. "Next project". */
   label?: string;
   /**
    * Stat row placement, per Figma variant:
@@ -26,26 +26,26 @@ interface CaseStudyShowcaseProps {
 }
 
 /**
- * Featured case presentation from the Figma: a soft panel with dashed topic
- * tags, the centered project wordmark, a stat row, and the product screenshot
- * framed in browser chrome over a green glow that bleeds to the panel's
- * bottom edge. Server Component; hover handled in CSS.
+ * Featured project presentation from the Figma: a soft panel with dashed
+ * topic tags, the centered project wordmark, a stat row, and the product
+ * screenshot framed in browser chrome over a green glow that bleeds to the
+ * panel's bottom edge. Server Component; hover handled in CSS.
  */
-export function CaseStudyShowcase({
-  caseStudy,
+export function WorkShowcase({
+  work,
   screenshot,
   label,
   metrics = "info",
   priority,
   className,
-}: CaseStudyShowcaseProps) {
-  const { slug, title, tags } = caseStudy;
-  const accent = caseStudy.accent ?? "#aee5a0";
-  const shot = screenshot ?? caseStudy.screenshot ?? caseStudy.cover;
+}: WorkShowcaseProps) {
+  const { slug, title, tags } = work;
+  const accent = work.accent ?? "#aee5a0";
+  const shot = screenshot ?? work.screenshot ?? work.cover;
 
-  const metricRow = caseStudy.metrics.length > 0 && (
+  const metricRow = work.metrics.length > 0 && (
     <dl className="flex flex-wrap justify-center gap-x-14 gap-y-5 text-left">
-      {caseStudy.metrics.map((metric) => (
+      {work.metrics.map((metric) => (
         <div key={metric.label} className="flex flex-col gap-1">
           <dt className="order-2 text-sm text-body">{metric.label}</dt>
           <dd className="order-1 text-[1.375rem] font-semibold leading-tight text-title">
@@ -58,7 +58,7 @@ export function CaseStudyShowcase({
 
   return (
     <Link
-      href={`/case-studies/${slug}`}
+      href={`/work/${slug}`}
       className={cn("group block", className)}
     >
       <article>
@@ -70,9 +70,9 @@ export function CaseStudyShowcase({
               <span className="text-sm font-medium text-body">{label}</span>
             )}
 
-            {(tags.length > 0 || caseStudy.demo) && (
+            {(tags.length > 0 || work.demo) && (
               <ul className="flex flex-wrap justify-center gap-2">
-                {caseStudy.demo && <DemoTag as="li" />}
+                {work.demo && <DemoTag as="li" />}
                 {tags.map((tag) => (
                   <li
                     key={tag}
@@ -91,7 +91,7 @@ export function CaseStudyShowcase({
             {metrics === "inside" && metricRow}
 
             {/* Info row: location/year · role/services · tools */}
-            {metrics === "info" && <CaseInfoRow caseStudy={caseStudy} />}
+            {metrics === "info" && <WorkInfoRow work={work} />}
           </div>
 
           {/* Screenshot in browser chrome over a green glow bleeding off the

@@ -1,40 +1,40 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { CaseStudy } from "@/types";
+import type { Work } from "@/types";
 import { MotionReveal } from "@/components/motion/MotionReveal";
-import { CaseInfoRow } from "@/components/shared/CaseInfoRow";
+import { WorkInfoRow } from "@/components/shared/WorkInfoRow";
 import { DemoTag } from "@/components/shared/DemoTag";
 import { LaptopMockup } from "@/components/shared/LaptopMockup";
 
-interface CaseStudyRowProps {
-  caseStudy: CaseStudy;
-  /** Laptop-screen shot (defaults to the case hero export). */
+interface WorkRowProps {
+  work: Work;
+  /** Laptop-screen shot (defaults to the work hero export). */
   screenshot?: string;
   /** Full-bleed banner fill behind the device. */
   bannerColor?: string;
 }
 
 /**
- * One case on the case-studies listing, per the Figma: centered brand lockup,
+ * One project on the work listing, per the Figma: centered brand lockup,
  * the one-line pitch, the info row, then a full-bleed colored banner with the
  * product on a MacBook overhanging both banner edges. The banner links to the
- * case study; hovering lifts the device.
+ * project; hovering lifts the device.
  */
-export function CaseStudyRow({
-  caseStudy,
+export function WorkRow({
+  work,
   screenshot,
   bannerColor,
-}: CaseStudyRowProps) {
-  const { slug, title, description, logo } = caseStudy;
-  const shot = screenshot ?? caseStudy.screenshot ?? caseStudy.cover;
+}: WorkRowProps) {
+  const { slug, title, description, logo } = work;
+  const shot = screenshot ?? work.screenshot ?? work.cover;
   const banner =
-    bannerColor ?? caseStudy.banner ?? caseStudy.accent ?? "#30e060";
+    bannerColor ?? work.banner ?? work.accent ?? "#30e060";
 
   return (
     <section className="py-24 md:py-30">
       <div className="w-full px-5 sm:px-8">
         <div className="mx-auto flex w-full max-w-page flex-col items-center gap-8 text-center">
-        {caseStudy.demo && (
+        {work.demo && (
           <MotionReveal>
             <DemoTag />
           </MotionReveal>
@@ -60,7 +60,7 @@ export function CaseStudyRow({
           </p>
         </MotionReveal>
         <MotionReveal delay={0.16}>
-          <CaseInfoRow caseStudy={caseStudy} />
+          <WorkInfoRow work={work} />
         </MotionReveal>
         </div>
       </div>
@@ -68,8 +68,8 @@ export function CaseStudyRow({
       {/* Full-bleed banner; the device overhangs both edges onto the sand. */}
       <MotionReveal className="mt-24 md:mt-30">
         <Link
-          href={`/case-studies/${slug}`}
-          aria-label={`Read the ${title} case study`}
+          href={`/work/${slug}`}
+          aria-label={`Read the ${title} project`}
           className="group block focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-ink"
         >
           {/* Flex prevents the device's negative margins from collapsing with

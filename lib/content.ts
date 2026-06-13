@@ -1,11 +1,11 @@
 import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import matter from "gray-matter";
-import type { BlogPost, CaseStudy } from "@/types";
+import type { BlogPost, Work } from "@/types";
 
 const CONTENT_DIR = join(process.cwd(), "content");
 
-type Collection = "blog" | "case-studies";
+type Collection = "blog" | "work";
 
 /** Raw MDX source + parsed frontmatter for a single entry. */
 interface Entry<TFrontmatter> {
@@ -60,14 +60,12 @@ export function getBlogPost(slug: string) {
 
 export const getBlogSlugs = () => listSlugs("blog");
 
-/* ---- Case studies ---- */
+/* ---- Work ---- */
 
-export async function getAllCaseStudies(): Promise<CaseStudy[]> {
-  const slugs = await listSlugs("case-studies");
+export async function getAllWork(): Promise<Work[]> {
+  const slugs = await listSlugs("work");
   const entries = await Promise.all(
-    slugs.map((slug) =>
-      readEntry<Omit<CaseStudy, "slug">>("case-studies", slug),
-    ),
+    slugs.map((slug) => readEntry<Omit<Work, "slug">>("work", slug)),
   );
   return entries
     .filter((e): e is NonNullable<typeof e> => e !== null)
@@ -75,8 +73,8 @@ export async function getAllCaseStudies(): Promise<CaseStudy[]> {
     .sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
 }
 
-export function getCaseStudy(slug: string) {
-  return readEntry<Omit<CaseStudy, "slug">>("case-studies", slug);
+export function getWork(slug: string) {
+  return readEntry<Omit<Work, "slug">>("work", slug);
 }
 
-export const getCaseStudySlugs = () => listSlugs("case-studies");
+export const getWorkSlugs = () => listSlugs("work");

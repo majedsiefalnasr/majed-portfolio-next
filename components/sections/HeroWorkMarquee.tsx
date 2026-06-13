@@ -4,12 +4,12 @@ import { cn } from "@/lib/utils";
 
 /** Mixed landscape/portrait rhythm, like a desk strewn with work. */
 const shots = [
-  { src: "/case-studies/zidney/cover.png", aspect: "aspect-[3/2]" },
+  { src: "/work/zidney/cover.png", aspect: "aspect-[3/2]" },
   { src: "/services/ipad-notes.png", aspect: "aspect-[4/5]" },
-  { src: "/case-studies/aurora/cover.png", aspect: "aspect-[3/2]" },
+  { src: "/work/aurora/cover.png", aspect: "aspect-[3/2]" },
   { src: "/services/ipad-keyboard.png", aspect: "aspect-[4/5]" },
-  { src: "/case-studies/bloom/cover.png", aspect: "aspect-[3/2]" },
-  { src: "/case-studies/pulse/cover.png", aspect: "aspect-[3/2]" },
+  { src: "/work/bloom/cover.png", aspect: "aspect-[3/2]" },
+  { src: "/work/pulse/cover.png", aspect: "aspect-[3/2]" },
 ];
 
 /**

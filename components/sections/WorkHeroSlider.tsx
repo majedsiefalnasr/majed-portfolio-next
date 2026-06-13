@@ -4,22 +4,22 @@ import { CarouselButton } from "@/components/ui/CarouselButton";
 import { LaptopMockup } from "@/components/shared/LaptopMockup";
 import { BrowserMock } from "@/components/shared/BrowserMock";
 import { useCarousel } from "@/lib/use-carousel";
-import type { CaseStudy } from "@/types";
+import type { Work } from "@/types";
 
-interface CaseHeroSliderProps {
-  caseStudy: CaseStudy;
+interface WorkHeroSliderProps {
+  work: Work;
 }
 
 /**
- * The case-study hero from the Figma: a full-bleed center-mode slider of
+ * The work detail hero from the Figma: a full-bleed center-mode slider of
  * wide presentation cards (the product on a laptop over a lime sweep, in
  * browser chrome on paper), neighbors peeking at the viewport edges,
  * circular prev/next below.
  */
-export function CaseHeroSlider({ caseStudy }: CaseHeroSliderProps) {
+export function WorkHeroSlider({ work }: WorkHeroSliderProps) {
   const { ref, canPrev, canNext, scrollPrev, scrollNext } = useCarousel();
-  const { slug, title, cover } = caseStudy;
-  const screenshot = caseStudy.screenshot ?? cover;
+  const { slug, title, cover } = work;
+  const screenshot = work.screenshot ?? cover;
 
   const slides = [
     <div

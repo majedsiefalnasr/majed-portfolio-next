@@ -1,12 +1,12 @@
-import type { CaseStudy } from "@/types";
+import type { Work } from "@/types";
 import { ToolIcon } from "@/components/shared/ToolIcon";
 
 /**
  * The location/year · role/services · tools row from the Figma, shared by the
- * featured showcase panel and the case-studies listing rows.
+ * featured showcase panel and the work listing rows.
  */
-export function CaseInfoRow({ caseStudy }: { caseStudy: CaseStudy }) {
-  const { locationYear, role, tools } = caseStudy;
+export function WorkInfoRow({ work }: { work: Work }) {
+  const { locationYear, role, tools } = work;
   if (!locationYear && !role && !(tools && tools.length > 0)) return null;
 
   return (

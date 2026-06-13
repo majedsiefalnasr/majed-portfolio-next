@@ -15,7 +15,7 @@ interface ImageGalleryProps {
 }
 
 /**
- * Responsive image grid for MDX case studies and posts. Every tile opens the
+ * Responsive image grid for MDX work entries and posts. Every tile opens the
  * shared lightbox (zooming out of the clicked tile); prev/next buttons and
  * arrow keys step through this gallery's images.
  */

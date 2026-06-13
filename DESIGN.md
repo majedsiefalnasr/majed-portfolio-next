@@ -287,7 +287,7 @@ covers, not as a universal layout reflex.
   **Majed** bold + *Sief Alnasr.* regular, uppercase — with the role ("CX & Product
   Designer") as a small Warm-Body subline (hidden on the smallest screens). Right side:
   the "Let's talk" primary pill and a circular menu button. The page links (Who am I /
-  Case studies / Blog) live behind the menu button at *every* breakpoint, not just
+  Work / Blog) live behind the menu button at *every* breakpoint, not just
   mobile; the button opens a Soft-Paper dropdown panel.
 - **States:** Inactive links Warm Body, active link Ink Black. Panel closes on link
   click, Escape, and outside pointer-down.

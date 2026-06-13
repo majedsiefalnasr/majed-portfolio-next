@@ -3,18 +3,14 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Section } from "@/components/layout/Section";
 import { Mdx } from "@/components/mdx/Mdx";
-import { NextCaseTeaser } from "@/components/shared/NextCaseTeaser";
-import { CaseHeroSlider } from "@/components/sections/CaseHeroSlider";
+import { NextWorkTeaser } from "@/components/shared/NextWorkTeaser";
+import { WorkHeroSlider } from "@/components/sections/WorkHeroSlider";
 import { ToolIcon } from "@/components/shared/ToolIcon";
 import { PageFooterSections } from "@/components/layout/PageFooterSections";
-import {
-  getCaseStudy,
-  getCaseStudySlugs,
-  getAllCaseStudies,
-} from "@/lib/content";
+import { getWork, getWorkSlugs, getAllWork } from "@/lib/content";
 
 export async function generateStaticParams() {
-  const slugs = await getCaseStudySlugs();
+  const slugs = await getWorkSlugs();
   return slugs.map((slug) => ({ slug }));
 }
 
@@ -24,7 +20,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const entry = await getCaseStudy(slug);
+  const entry = await getWork(slug);
   if (!entry) return {};
   return {
     title: entry.frontmatter.title,
@@ -32,25 +28,25 @@ export async function generateMetadata({
   };
 }
 
-export default async function CaseStudyDetailPage({
+export default async function WorkDetailPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const entry = await getCaseStudy(slug);
+  const entry = await getWork(slug);
   if (!entry) notFound();
 
   const { frontmatter, body } = entry;
-  const all = await getAllCaseStudies();
-  const next = all.find((cs) => cs.slug !== slug);
+  const all = await getAllWork();
+  const next = all.find((w) => w.slug !== slug);
 
   return (
     <>
       <Section width="prose">
         <nav className="mb-8 flex items-center gap-2 text-sm text-body">
-          <Link href="/case-studies" className="hover:text-title">
-            Case Studies
+          <Link href="/work" className="hover:text-title">
+            Work
           </Link>
           <span aria-hidden>›</span>
           <span className="text-title">{frontmatter.title}</span>
@@ -88,7 +84,7 @@ export default async function CaseStudyDetailPage({
         </header>
       </Section>
 
-      <CaseHeroSlider caseStudy={{ ...frontmatter, slug }} />
+      <WorkHeroSlider work={{ ...frontmatter, slug }} />
 
       <Section width="prose">
         <article>
@@ -98,7 +94,7 @@ export default async function CaseStudyDetailPage({
 
       {next && (
         <Section>
-          <NextCaseTeaser caseStudy={next} />
+          <NextWorkTeaser work={next} />
         </Section>
       )}
 

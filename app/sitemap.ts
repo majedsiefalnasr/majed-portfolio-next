@@ -1,12 +1,12 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site-config";
-import { getCaseStudySlugs, getBlogSlugs } from "@/lib/content";
+import { getWorkSlugs, getBlogSlugs } from "@/lib/content";
 import { features } from "@/lib/features";
 
-/** Static routes + case-study and blog detail pages, sourced from content/. */
+/** Static routes + work and blog detail pages, sourced from content/. */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
-  const staticPaths = ["", "/who-am-i", "/case-studies"];
+  const staticPaths = ["", "/who-am-i", "/work"];
   if (features.blog) staticPaths.push("/blog");
   const staticRoutes = staticPaths.map((path) => ({
     url: `${siteConfig.url}${path}`,
@@ -15,13 +15,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: path === "" ? 1 : 0.8,
   }));
 
-  const [caseStudySlugs, blogSlugs] = await Promise.all([
-    getCaseStudySlugs(),
+  const [workSlugs, blogSlugs] = await Promise.all([
+    getWorkSlugs(),
     features.blog ? getBlogSlugs() : Promise.resolve([]),
   ]);
 
   const detailRoutes = [
-    ...caseStudySlugs.map((slug) => `/case-studies/${slug}`),
+    ...workSlugs.map((slug) => `/work/${slug}`),
     ...blogSlugs.map((slug) => `/blog/${slug}`),
   ].map((path) => ({
     url: `${siteConfig.url}${path}`,

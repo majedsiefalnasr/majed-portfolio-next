@@ -7,7 +7,7 @@ interface MetricBlockProps {
   metrics: Metric[];
 }
 
-/** Row of headline stats for use inside MDX case studies. */
+/** Row of headline stats for use inside MDX work entries. */
 export function MetricBlock({ metrics }: MetricBlockProps) {
   return (
     <dl className="my-8 grid grid-cols-2 gap-6 rounded-large bg-surface p-8 md:grid-cols-4">

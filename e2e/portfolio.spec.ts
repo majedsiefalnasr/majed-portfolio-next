@@ -20,15 +20,15 @@ test.describe("Portfolio", () => {
     await page.goto("/");
     // Page links live behind the menu button at every breakpoint.
     await page.getByRole("button", { name: "Open menu" }).click();
-    await page.getByRole("link", { name: "Case Studies", exact: true }).click();
-    await expect(page).toHaveURL(/\/case-studies$/);
+    await page.getByRole("link", { name: "Work", exact: true }).click();
+    await expect(page).toHaveURL(/\/work$/);
     await expect(
       page.getByRole("heading", { level: 1 }),
     ).toBeVisible();
   });
 
-  test("case study detail renders MDX + custom blocks", async ({ page }) => {
-    await page.goto("/case-studies/zidney");
+  test("work detail renders MDX + custom blocks", async ({ page }) => {
+    await page.goto("/work/zidney");
     await expect(
       page.getByRole("heading", { level: 1, name: "Zidney" }),
     ).toBeVisible();
@@ -59,10 +59,10 @@ test.describe("Portfolio", () => {
     await expect(page.getByText(/you.re on the list/i)).toBeVisible();
   });
 
-  test("flagship case study renders all template sections", async ({
+  test("flagship work entry renders all template sections", async ({
     page,
   }) => {
-    await page.goto("/case-studies/atlas-freight");
+    await page.goto("/work/atlas-freight");
     await expect(
       page.getByRole("heading", { level: 1, name: "Atlas Freight" }),
     ).toBeVisible();

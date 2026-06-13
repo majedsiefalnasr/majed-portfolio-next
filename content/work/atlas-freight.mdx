@@ -1,8 +1,8 @@
 ---
 title: Atlas Freight
 description: Rebuilding the quoting workspace for a freight brokerage platform, taking median quote turnaround from 3.1 hours to 22 minutes.
-cover: /case-studies/atlas-freight/cover.png
-screenshot: /case-studies/atlas-freight/screenshot.png
+cover: /work/atlas-freight/cover.png
+screenshot: /work/atlas-freight/screenshot.png
 accent: "#cfe0ff"
 banner: "#2f6bff"
 tags:
@@ -96,7 +96,7 @@ directly:
 4. **Margin is checked too late.** Ops reviewed margins after quotes went out. Coaching happened weeks later, if ever.
 5. **Losses teach nothing.** No one recorded why a quote lost, so pricing intuition never compounded across the desk.
 
-![Current-state journey map with the emotional temperature dropping through the rate-chasing and follow-up stages](/case-studies/atlas-freight/journey-map.png)
+![Current-state journey map with the emotional temperature dropping through the rate-chasing and follow-up stages](/work/atlas-freight/journey-map.png)
 
 ## Personas
 
@@ -106,8 +106,8 @@ interview coding, not from demographics.
 <ImageGallery
   columns={2}
   images={[
-    { src: "/case-studies/atlas-freight/persona-broker.png", alt: "Dana, freight broker persona: quote fast, protect margin, stop retyping" },
-    { src: "/case-studies/atlas-freight/persona-ops.png", alt: "Viktor, ops manager persona: consistent margins, visible pipeline, faster onboarding" },
+    { src: "/work/atlas-freight/persona-broker.png", alt: "Dana, freight broker persona: quote fast, protect margin, stop retyping" },
+    { src: "/work/atlas-freight/persona-ops.png", alt: "Viktor, ops manager persona: consistent margins, visible pipeline, faster onboarding" },
   ]}
 />
 
@@ -132,7 +132,7 @@ A 24-participant card sort (brokers and ops, mixed) reshaped the navigation:
 - "Outcomes" emerged as a first-class area. Nobody had a home for win/loss before, which is exactly why it never happened.
 - The pipeline organizes by **urgency, not status**. Brokers triage by "what expires next", so the default sort follows the clock.
 
-![Information architecture v3: pipeline, quote builder, rates, and outcomes under one quote workspace](/case-studies/atlas-freight/ia-map.png)
+![Information architecture v3: pipeline, quote builder, rates, and outcomes under one quote workspace](/work/atlas-freight/ia-map.png)
 
 ## Design decisions
 
@@ -152,9 +152,9 @@ core flow:
 <ImageGallery
   columns={3}
   images={[
-    { src: "/case-studies/atlas-freight/wire-pipeline.png", alt: "Quote pipeline wireframe: urgency-grouped list with preview panel" },
-    { src: "/case-studies/atlas-freight/wire-builder.png", alt: "Quote builder wireframe: lane form, live rates, margin guard, customer preview" },
-    { src: "/case-studies/atlas-freight/wire-outcomes.png", alt: "Win/loss log wireframe: win rate by lane, loss reasons, rate gap" },
+    { src: "/work/atlas-freight/wire-pipeline.png", alt: "Quote pipeline wireframe: urgency-grouped list with preview panel" },
+    { src: "/work/atlas-freight/wire-builder.png", alt: "Quote builder wireframe: lane form, live rates, margin guard, customer preview" },
+    { src: "/work/atlas-freight/wire-outcomes.png", alt: "Win/loss log wireframe: win rate by lane, loss reasons, rate gap" },
   ]}
 />
 
@@ -172,7 +172,7 @@ the data, not the furniture. Money and margins render in tabular numerals so
 columns scan vertically at speed.
 
 <DeviceMockup url="app.atlasfreight.com">
-  <img src="/case-studies/atlas-freight/screenshot.png" alt="Atlas Freight quote workspace: urgency-sorted pipeline with margin and rate-freshness columns" className="absolute inset-0 h-auto w-full object-top" />
+  <img src="/work/atlas-freight/screenshot.png" alt="Atlas Freight quote workspace: urgency-sorted pipeline with margin and rate-freshness columns" className="absolute inset-0 h-auto w-full object-top" />
 </DeviceMockup>
 
 ## Design system
@@ -184,7 +184,7 @@ research, not aesthetics: status is never communicated by color alone
 (two of the 14 interviewed brokers were colorblind), and every monetary value
 uses tabular numerals.
 
-![Atlas design system core slice: color tokens, status chips, type scale, and the quote-line row component](/case-studies/atlas-freight/ds-board.png)
+![Atlas design system core slice: color tokens, status chips, type scale, and the quote-line row component](/work/atlas-freight/ds-board.png)
 
 ## Prototype
 

@@ -8,10 +8,10 @@ import {
   useMotionTemplate,
   type MotionValue,
 } from "motion/react";
-import type { CaseStudy } from "@/types";
+import type { Work } from "@/types";
 import { cn } from "@/lib/utils";
 import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
-import { CaseStudyShowcase } from "@/components/shared/CaseStudyShowcase";
+import { WorkShowcase } from "@/components/shared/WorkShowcase";
 
 /**
  * The home "PROJECTS" scroll stack from the Figma: the oversized wordmark
@@ -22,7 +22,7 @@ import { CaseStudyShowcase } from "@/components/shared/CaseStudyShowcase";
  *
  * Reduced motion keeps the exact same tree (so hydration and the useScroll
  * targets stay stable) but drops the sticky choreography and transforms,
- * leaving a plain list of the real cases.
+ * leaving a plain list of the real work.
  */
 
 /** The Figma frame shows three sheets peeking behind the front card. */
@@ -53,24 +53,24 @@ const blurForDepth = (depth: number) => {
 };
 
 interface ProjectsStackProps {
-  caseStudies: CaseStudy[];
+  workItems: Work[];
 }
 
-export function ProjectsStack({ caseStudies }: ProjectsStackProps) {
+export function ProjectsStack({ workItems }: ProjectsStackProps) {
   const isStatic = usePrefersReducedMotion();
 
-  // Fill the stack to the designed depth by cycling the available cases;
-  // fills are inert so assistive tech only meets each case once.
+  // Fill the stack to the designed depth by cycling the available work
+  // items; fills are inert so assistive tech only meets each one once.
   const cards = Array.from(
-    { length: Math.max(caseStudies.length, STACK_SIZE) },
-    (_, i) => caseStudies[i % caseStudies.length],
+    { length: Math.max(workItems.length, STACK_SIZE) },
+    (_, i) => workItems[i % workItems.length],
   );
   const wrapperRefs = useMemo(
     () => Array.from({ length: cards.length }, () => createRef<HTMLDivElement>()),
     [cards.length],
   );
 
-  if (caseStudies.length === 0) return null;
+  if (workItems.length === 0) return null;
 
   return (
     <div className="relative">
@@ -89,16 +89,16 @@ export function ProjectsStack({ caseStudies }: ProjectsStackProps) {
         </div>
       </div>
 
-      {cards.map((caseStudy, index) => (
+      {cards.map((work, index) => (
         <StackCard
           key={index}
           index={index}
           wrapperRefs={wrapperRefs}
-          isFill={index >= caseStudies.length}
+          isFill={index >= workItems.length}
           isStatic={isStatic}
         >
-          <CaseStudyShowcase
-            caseStudy={caseStudy}
+          <WorkShowcase
+            work={work}
             metrics="inside"
             priority={index === 0}
           />

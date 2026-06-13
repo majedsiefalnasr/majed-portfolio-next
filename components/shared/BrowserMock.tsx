@@ -50,14 +50,14 @@ export function BrowserMock({ screenshot, alt, url, priority, className }: Brows
           <Copy size={12} />
         </span>
       </div>
-      <div className="relative aspect-[15/8] w-full overflow-hidden bg-white">
+      <div className="relative aspect-15/8 w-full overflow-hidden bg-white">
         <Image
           src={screenshot}
           alt={alt}
           fill
           priority={priority}
           sizes="(min-width: 768px) 768px, 100vw"
-          className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+          className="object-cover object-top transition-transform duration-500"
         />
       </div>
     </div>

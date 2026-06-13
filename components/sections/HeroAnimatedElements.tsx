@@ -87,7 +87,7 @@ export function HeroAnimatedElements() {
           transitionTimingFunction: "cubic-bezier(0.22,1,0.36,1)",
         }}
       >
-        <CtaLink href="/case-studies">See my work</CtaLink>
+        <CtaLink href="/work">See my work</CtaLink>
         <CtaLink href={siteConfig.links.bookingEmail} variant="secondary">
           Let&apos;s talk
         </CtaLink>

@@ -5,11 +5,11 @@ import { ProjectsStack } from "@/components/sections/ProjectsStack";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { CapabilityChips } from "@/components/sections/CapabilityChips";
 import { ExperienceCapabilities } from "@/components/sections/ExperienceCapabilities";
-import { CaseStudyShowcase } from "@/components/shared/CaseStudyShowcase";
+import { WorkShowcase } from "@/components/shared/WorkShowcase";
 import { DesignApproachCarousel } from "@/components/sections/DesignApproachCarousel";
 import { ServicesShowcase } from "@/components/sections/ServicesShowcase";
 import { TestimonialBlock } from "@/components/shared/TestimonialBlock";
-import { ProofMarquee } from "@/components/sections/ProofMarquee";
+import { TrustSection } from "@/components/sections/TrustSection";
 import { BlogCarousel } from "@/components/sections/BlogCarousel";
 import { NewsletterCTA } from "@/components/shared/NewsletterCTA";
 import { ContactCTA } from "@/components/shared/ContactCTA";
@@ -19,16 +19,16 @@ import { PricingSection } from "@/components/sections/PricingSection";
 import { ReachOutSteps } from "@/components/sections/ReachOutSteps";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { CtaLink } from "@/components/ui/CtaLink";
-import { getAllCaseStudies, getAllBlogPosts } from "@/lib/content";
+import { getAllWork, getAllBlogPosts } from "@/lib/content";
 import { features } from "@/lib/features";
 import { pullQuote } from "@/data/testimonials";
 
 export default async function HomePage() {
-  const [caseStudies, posts] = await Promise.all([
-    getAllCaseStudies(),
+  const [workItems, posts] = await Promise.all([
+    getAllWork(),
     features.blog ? getAllBlogPosts() : Promise.resolve([]),
   ]);
-  const featuredCase = caseStudies[0];
+  const featuredWork = workItems[0];
 
   return (
     <>
@@ -42,9 +42,9 @@ export default async function HomePage() {
           See for yourself. Here&apos;s <strong>the work</strong> and{" "}
           <strong>what it changed</strong> for the people using it 👇
         </SectionIntro>
-        {featuredCase && (
+        {featuredWork && (
           <div className="mt-10">
-            <ProjectsStack caseStudies={caseStudies} />
+            <ProjectsStack workItems={workItems} />
             <div className="mt-14 flex flex-col items-center gap-4 text-center">
               <span className="text-3xl" aria-hidden>
                 🍀
@@ -52,8 +52,8 @@ export default async function HomePage() {
               <p className="text-h3 font-semibold text-title">
                 And that&apos;s not all.
               </p>
-              <CtaLink href="/case-studies" variant="secondary">
-                View all case studies
+              <CtaLink href="/work" variant="secondary">
+                View all work
               </CtaLink>
             </div>
           </div>
@@ -129,28 +129,20 @@ export default async function HomePage() {
       </Section>
 
       {/* Skilled / proof */}
-      {featuredCase && (
+      {featuredWork && (
         <Section>
           <SectionIntro headline="Is he skilled enough?">
             Claims are cheap. Here&apos;s <strong>one project, end to end</strong>
             , with the numbers it moved.
           </SectionIntro>
           <div className="mt-12">
-            <CaseStudyShowcase caseStudy={featuredCase} metrics="below" />
+            <WorkShowcase work={featuredWork} metrics="below" />
           </div>
         </Section>
       )}
 
       {/* Trust / proof terminals */}
-      <Section>
-        <SectionIntro headline="Can I trust him with my project?">
-          Don&apos;t take my word for it. <strong>Read the output</strong>:
-          what clients say, what the work moved, and how it gets done.
-        </SectionIntro>
-        <div className="mt-12">
-          <ProofMarquee />
-        </div>
-      </Section>
+      <TrustSection />
 
       {/* Insights */}
       {features.blog && posts.length > 0 && (

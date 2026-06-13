@@ -1,34 +1,34 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { CaseStudy } from "@/types";
+import type { Work } from "@/types";
 import { DemoTag } from "@/components/shared/DemoTag";
 import { cn } from "@/lib/utils";
 
-interface CaseStudyCardProps {
-  caseStudy: CaseStudy;
+interface WorkCardProps {
+  work: Work;
   /** `featured` = large hero card; `grid` = compact listing card. */
   variant?: "featured" | "grid";
-  /** Optional eyebrow label, e.g. "Next case →". Covers the old NextCaseStudyTeaser. */
+  /** Optional eyebrow label, e.g. "Next project →". Covers the old NextWorkTeaser. */
   label?: string;
   className?: string;
 }
 
 /**
- * Single source for project cards across Home, Case Studies, Who Am I.
+ * Single source for project cards across Home, Work, Who Am I.
  * Hover handled purely in CSS so this stays a Server Component.
  */
-export function CaseStudyCard({
-  caseStudy,
+export function WorkCard({
+  work,
   variant = "grid",
   label,
   className,
-}: CaseStudyCardProps) {
-  const { slug, title, description, cover, tags, metrics } = caseStudy;
+}: WorkCardProps) {
+  const { slug, title, description, cover, tags, metrics } = work;
   const featured = variant === "featured";
 
   return (
     <Link
-      href={`/case-studies/${slug}`}
+      href={`/work/${slug}`}
       className={cn(
         "group block overflow-hidden rounded-card bg-surface ring-1 ring-ink/5 transition-shadow duration-300 hover:shadow-xl",
         className,
@@ -39,9 +39,9 @@ export function CaseStudyCard({
           {label && (
             <span className="text-sm font-medium text-body">{label}</span>
           )}
-          {(tags.length > 0 || caseStudy.demo) && (
+          {(tags.length > 0 || work.demo) && (
             <ul className="flex flex-wrap gap-2">
-              {caseStudy.demo && (
+              {work.demo && (
                 <DemoTag as="li" className="px-3 py-1 text-xs" />
               )}
               {tags.map((tag) => (

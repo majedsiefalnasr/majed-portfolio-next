@@ -1,20 +1,19 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/layout/Section";
 import { SectionIntro } from "@/components/shared/SectionIntro";
-import { CaseStudyRow } from "@/components/shared/CaseStudyRow";
-import { TestimonialBlock } from "@/components/shared/TestimonialBlock";
+import { WorkRow } from "@/components/shared/WorkRow";
+import { TrustSection } from "@/components/sections/TrustSection";
 import { PageFooterSections } from "@/components/layout/PageFooterSections";
-import { getAllCaseStudies } from "@/lib/content";
-import { testimonials } from "@/data/testimonials";
+import { getAllWork } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Case studies",
+  title: "Work",
   description:
-    "Selected work — end-to-end CX, UX/UI, and product design case studies.",
+    "Selected work — end-to-end CX, UX/UI, and product design projects.",
 };
 
-export default async function CaseStudiesPage() {
-  const caseStudies = await getAllCaseStudies();
+export default async function WorkPage() {
+  const workItems = await getAllWork();
 
   return (
     <>
@@ -32,21 +31,11 @@ export default async function CaseStudiesPage() {
         </div>
       </Section>
 
-      {caseStudies.map((cs) => (
-        <CaseStudyRow key={cs.slug} caseStudy={cs} />
+      {workItems.map((work) => (
+        <WorkRow key={work.slug} work={work} />
       ))}
 
-      {testimonials[0] && (
-        <Section>
-          <SectionIntro headline="Can I trust him with my project?">
-            <strong>Good design speaks</strong> for itself, but feedback matters
-            too. Here is what working with me is like: 👇
-          </SectionIntro>
-          <div className="mt-12">
-            <TestimonialBlock testimonial={testimonials[0]} />
-          </div>
-        </Section>
-      )}
+      <TrustSection />
 
       <PageFooterSections withNewsletter={false} />
     </>
