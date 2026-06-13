@@ -1,6 +1,5 @@
 import { HeroAnimatedElements } from "@/components/sections/HeroAnimatedElements";
 import { HeroWorkMarquee } from "@/components/sections/HeroWorkMarquee";
-import { HeroExit } from "@/components/motion/HeroExit";
 
 /**
  * Home hero: status pill, value-prop headline, supporting line, dual CTAs,
@@ -10,11 +9,9 @@ import { HeroExit } from "@/components/motion/HeroExit";
  */
 export function HeroSection() {
   return (
-    <HeroExit>
-      <div className="flex flex-col items-center gap-24 py-6 sm:gap-28 sm:py-10">
-        <HeroAnimatedElements />
-        <HeroWorkMarquee />
-      </div>
-    </HeroExit>
+    <div className="flex flex-col items-center gap-24 py-6 sm:gap-28 sm:py-10">
+      <HeroAnimatedElements />
+      <HeroWorkMarquee />
+    </div>
   );
 }

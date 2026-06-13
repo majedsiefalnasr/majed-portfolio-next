@@ -60,7 +60,8 @@ export function PageTransitionWipe() {
   return (
     <svg
       aria-hidden
-      className="pointer-events-none fixed inset-0 z-[100] h-full w-full"
+      className="pointer-events-none fixed inset-0 h-full w-full"
+      style={{ zIndex: "var(--z-route-wipe)" }}
       viewBox="0 0 100 100"
       preserveAspectRatio="none"
     >

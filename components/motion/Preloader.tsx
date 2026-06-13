@@ -45,7 +45,11 @@ export function Preloader() {
   if (reducedMotion || done) return null;
 
   return (
-    <div aria-hidden className="fixed inset-0 z-[200]">
+    <div
+      aria-hidden
+      className="fixed inset-0"
+      style={{ zIndex: "var(--z-preloader)" }}
+    >
       <svg
         className="absolute inset-0 h-full w-full"
         viewBox="0 0 100 100"
@@ -63,6 +67,8 @@ export function Preloader() {
             src="/avatar.png"
             alt=""
             fill
+            loading="eager"
+            fetchPriority="high"
             sizes="80px"
             className="object-cover object-top"
           />

@@ -4,7 +4,6 @@ import Image from "next/image";
 import { motion } from "motion/react";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { siteConfig } from "@/lib/site-config";
-import { fadeUp } from "@/lib/animations";
 
 /**
  * "Who am I?" hero: the big avatar in its soft halo with the waving hand and
@@ -38,7 +37,9 @@ export function AvatarHero() {
             src="/avatar.png"
             alt="Majed Sief Alnasr"
             fill
-            priority
+            preload
+            loading="eager"
+            fetchPriority="high"
             sizes="210px"
             className="object-cover object-top"
           />

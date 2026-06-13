@@ -1,15 +1,16 @@
 import Image from "next/image";
+import type { CSSProperties } from "react";
 import { Marquee } from "@/components/motion/Marquee";
 import { cn } from "@/lib/utils";
 
 /** Mixed landscape/portrait rhythm, like a desk strewn with work. */
 const shots = [
-  { src: "/work/zidney/cover.png", aspect: "aspect-[3/2]" },
-  { src: "/services/ipad-notes.png", aspect: "aspect-[4/5]" },
-  { src: "/work/aurora/cover.png", aspect: "aspect-[3/2]" },
-  { src: "/services/ipad-keyboard.png", aspect: "aspect-[4/5]" },
-  { src: "/work/bloom/cover.png", aspect: "aspect-[3/2]" },
-  { src: "/work/pulse/cover.png", aspect: "aspect-[3/2]" },
+  { src: "/work/zidney/cover.png", aspect: "aspect-[3/2]", tilt: "-0.7deg" },
+  { src: "/services/ipad-notes.png", aspect: "aspect-[4/5]", tilt: "0.8deg" },
+  { src: "/work/aurora/cover.png", aspect: "aspect-[3/2]", tilt: "-0.4deg" },
+  { src: "/services/ipad-keyboard.png", aspect: "aspect-[4/5]", tilt: "0.6deg" },
+  { src: "/work/bloom/cover.png", aspect: "aspect-[3/2]", tilt: "-0.6deg" },
+  { src: "/work/pulse/cover.png", aspect: "aspect-[3/2]", tilt: "0.5deg" },
 ];
 
 /**
@@ -27,9 +28,14 @@ export function HeroWorkMarquee() {
           <div
             key={shot.src}
             className={cn(
-              "relative h-[240px] overflow-hidden rounded-large ring-1 ring-ink/5 md:h-[330px]",
+              "hero-work-shot relative h-[240px] overflow-hidden rounded-large ring-1 ring-ink/5 md:h-[330px]",
               shot.aspect,
             )}
+            style={{
+              "--shot-index": i,
+              "--shot-rest-tilt": shot.tilt,
+              "--shot-tilt": shot.tilt,
+            } as CSSProperties}
           >
             <Image
               src={shot.src}

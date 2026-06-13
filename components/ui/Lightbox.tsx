@@ -253,7 +253,8 @@ export function Lightbox({
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[60] flex items-center justify-center p-3 sm:p-4"
+      className="fixed inset-0 flex items-center justify-center p-3 sm:p-4"
+      style={{ zIndex: "var(--z-modal)" }}
       role="dialog"
       aria-modal="true"
       aria-label={image.alt || "Image viewer"}
@@ -262,7 +263,7 @@ export function Lightbox({
         style={{ opacity: backdropOpacity }}
         onClick={closeWithAnimation}
         aria-hidden
-        className="absolute inset-0 bg-ink/80 backdrop-blur-md"
+        className="absolute inset-0 bg-ink/10 backdrop-blur-md"
       />
 
       <motion.figure

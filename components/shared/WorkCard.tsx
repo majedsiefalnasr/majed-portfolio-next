@@ -30,7 +30,7 @@ export function WorkCard({
     <Link
       href={`/work/${slug}`}
       className={cn(
-        "group block overflow-hidden rounded-card bg-surface ring-1 ring-ink/5 transition-shadow duration-300 hover:shadow-xl",
+        "paper-reach group block overflow-hidden rounded-card bg-surface ring-1 ring-ink/5 hover:shadow-xl",
         className,
       )}
     >

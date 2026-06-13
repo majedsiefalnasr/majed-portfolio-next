@@ -69,7 +69,7 @@ export function ReachOutSteps() {
             <MotionReveal delay={i * 0.12} className="h-full">
               <article
                 className={cn(
-                  "flex h-full flex-col rounded-large bg-surface p-7 ring-1 ring-ink/5 transition duration-300 hover:rotate-0 hover:shadow-lg md:min-h-[300px]",
+                  "paper-reach flex h-full flex-col rounded-large bg-surface p-7 ring-1 ring-ink/5 hover:shadow-lg md:min-h-[300px]",
                   tilts[i],
                 )}
               >

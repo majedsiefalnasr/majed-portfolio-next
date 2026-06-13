@@ -60,7 +60,7 @@ function PlanCard({ plan }: { plan: PricingPlan }) {
             : `${siteConfig.links.bookingEmail}?subject=${encodeURIComponent(plan.cta.subject)}`
         }
         className={cn(
-          "mt-auto inline-flex h-[54px] items-center justify-center rounded-pill px-8 text-base font-medium transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2",
+          "tap-feedback mt-auto inline-flex h-[54px] items-center justify-center rounded-pill px-8 text-base font-medium focus-visible:outline-2 focus-visible:outline-offset-2",
           featured
             ? "bg-paper text-ink outline-paper hover:bg-paper/90"
             : "bg-ink text-paper outline-ink hover:bg-ink/90",

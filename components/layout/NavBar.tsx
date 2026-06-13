@@ -40,7 +40,10 @@ export function NavBar() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-md">
+    <header
+      className="sticky top-0 w-full bg-background/80 backdrop-blur-md"
+      style={{ zIndex: "var(--z-nav)" }}
+    >
       <nav className="w-full px-5 sm:px-8 pt-4">
         <div className="mx-auto flex h-[72px] max-w-page items-center justify-between">
         <Link
@@ -53,6 +56,7 @@ export function NavBar() {
               src="/avatar.png"
               alt=""
               fill
+              loading="eager"
               sizes="44px"
               className="object-cover object-top"
             />
@@ -78,15 +82,24 @@ export function NavBar() {
               aria-expanded={open}
               aria-controls="primary-menu"
               onClick={() => setOpen((v) => !v)}
-              className="inline-flex size-[54px] items-center justify-center rounded-pill bg-surface text-title ring-1 ring-ink/10 transition-colors hover:bg-ink/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+              className="tap-feedback inline-flex size-[54px] items-center justify-center rounded-pill bg-surface text-title ring-1 ring-ink/10 hover:bg-ink/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
             >
-              {open ? <X className="size-5" /> : <Menu className="size-5" />}
+              <span
+                className={cn(
+                  "grid transition-transform duration-200 [transition-timing-function:var(--ease-out-quart)]",
+                  open && "rotate-90",
+                )}
+                aria-hidden
+              >
+                {open ? <X className="size-5" /> : <Menu className="size-5" />}
+              </span>
             </button>
 
             {/* Floating pill stack (Figma): each link is its own white pill,
                 right-aligned under the menu button, staggering in. */}
             <ul
               id="primary-menu"
+              aria-hidden={!open}
               className={cn(
                 "absolute right-0 top-[calc(100%+0.75rem)] flex w-max flex-col items-end gap-3",
                 !open && "pointer-events-none",
@@ -101,7 +114,7 @@ export function NavBar() {
                   <li
                     key={link.href}
                     className={cn(
-                      "transition duration-200 ease-out",
+                      "transition duration-200 [transition-timing-function:var(--ease-out-quart)]",
                       open
                         ? "translate-y-0 opacity-100"
                         : "-translate-y-2 opacity-0 pointer-events-none",
@@ -110,9 +123,10 @@ export function NavBar() {
                   >
                     <Link
                       href={link.href}
+                      tabIndex={open ? undefined : -1}
                       onClick={() => setOpen(false)}
                       className={cn(
-                        "flex h-[54px] items-center whitespace-nowrap rounded-pill bg-surface px-6 text-[15px] text-title shadow-[0_18px_40px_-18px_rgba(26,26,26,0.35)] ring-1 ring-ink/5 transition-colors hover:bg-ink hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink",
+                        "tap-feedback flex h-[54px] items-center whitespace-nowrap rounded-pill bg-surface px-6 text-[15px] text-title shadow-[0_8px_8px_-8px_rgba(26,26,26,0.18)] ring-1 ring-ink/5 hover:bg-ink hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink",
                         active ? "font-bold" : "font-semibold",
                       )}
                     >
