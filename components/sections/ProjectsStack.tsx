@@ -32,7 +32,7 @@ const STACK_SIZE = 4;
 const PEEK = "clamp(16px, 1.7vw, 26px)";
 
 /** Wordmark sticky offset (below the 64px nav). */
-const WORD_TOP = "5rem";
+const WORD_TOP = "8rem";
 
 /** Card sticky offset: the front card lands just under the wordmark's
  * baseline so it covers only the descenders, not the legible letter bodies.
@@ -77,12 +77,12 @@ export function ProjectsStack({ workItems }: ProjectsStackProps) {
       <div
         aria-hidden
         className={cn("pointer-events-none", !isStatic && "sticky z-0")}
-        style={isStatic ? undefined : { top: WORD_TOP, marginBottom: "-50px" }}
+        style={isStatic ? undefined : { top: WORD_TOP, height: "60px", overflow: "clip" }}
       >
         <div className="flex justify-center leading-none select-none">
           <span
             className="font-extrabold tracking-[-0.04em] text-title"
-            style={{ fontSize: "clamp(3.75rem, 12.3vw, 11.75rem)" }}
+            style={{ fontSize: "clamp(3.75rem, 16vw, 11.75rem)" }}
           >
             PROJECTS
           </span>

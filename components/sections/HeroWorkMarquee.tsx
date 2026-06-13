@@ -23,12 +23,12 @@ export function HeroWorkMarquee() {
     // Full-bleed inside the hero's centered flex column: a w-screen item
     // centers itself on the viewport, no left/margin offsets needed.
     <div className="w-screen" aria-hidden>
-      <Marquee speed={45} gapClass="gap-4 pe-4 md:gap-6 md:pe-6">
+      <Marquee speed={36} gapClass="gap-3 pe-3 sm:gap-4 sm:pe-4 md:gap-6 md:pe-6">
         {shots.map((shot, i) => (
           <div
             key={shot.src}
             className={cn(
-              "hero-work-shot relative h-[240px] overflow-hidden rounded-large ring-1 ring-ink/5 md:h-[330px]",
+              "hero-work-shot relative h-[260px] overflow-hidden rounded-large ring-1 ring-ink/5 sm:h-[320px]",
               shot.aspect,
             )}
             style={{
@@ -41,7 +41,7 @@ export function HeroWorkMarquee() {
               src={shot.src}
               alt=""
               fill
-              priority={i < 2}
+              priority={i < 4}
               sizes="(min-width: 768px) 500px, 360px"
               className="object-cover"
             />

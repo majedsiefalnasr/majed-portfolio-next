@@ -19,7 +19,7 @@ export function ContactCTA() {
           ghost layer counter-drifts (EmailDrift). */}
       {/* Figma: main email left-aligned at the box edge bleeding right; the
           ghost layer is ~3x larger behind it. */}
-      <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-hidden">
+      <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen">
         <a
           href={`mailto:${siteConfig.email}`}
           className="group relative block"

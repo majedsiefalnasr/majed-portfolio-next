@@ -106,13 +106,12 @@ export default async function HomePage() {
 
       {/* Design approach — the thinking behind the work */}
       <Section>
-        <SectionIntro headline="Why does his design approach work?">
-          Because it starts with <strong>people, not pixels</strong>. Five
-          principles guide every project:
-        </SectionIntro>
-        <div className="mt-12">
-          <DesignApproachCarousel />
-        </div>
+        <DesignApproachCarousel>
+          <SectionIntro headline="Why does his design approach work?">
+            Because it starts with <strong>people, not pixels</strong>. Five
+            principles guide every project:
+          </SectionIntro>
+        </DesignApproachCarousel>
       </Section>
 
       {/* Editorial pull-quote — the philosophy in one line */}

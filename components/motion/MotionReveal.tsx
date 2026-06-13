@@ -2,7 +2,8 @@
 
 import { motion } from "motion/react";
 import type { ComponentProps } from "react";
-import { fadeUp, viewportOnce } from "@/lib/animations";
+import { fadeIn, fadeUp, viewportOnce } from "@/lib/animations";
+import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 
 type MotionRevealProps = ComponentProps<typeof motion.div> & {
   /** Stagger delay (s) for sequenced reveals. */
@@ -15,13 +16,22 @@ type MotionRevealProps = ComponentProps<typeof motion.div> & {
  * sections stay Server Components and wrap just their animated children in this.
  */
 export function MotionReveal({ delay = 0, transition, ...props }: MotionRevealProps) {
+  const reducedMotion = usePrefersReducedMotion();
+  const variants = reducedMotion ? fadeIn : fadeUp;
+
   return (
     <motion.div
-      variants={fadeUp}
-      initial="hidden"
+      variants={variants}
+      initial={reducedMotion ? "visible" : "hidden"}
       whileInView="visible"
       viewport={viewportOnce}
-      transition={delay ? { delay } : transition}
+      transition={
+        reducedMotion
+          ? { duration: 0.01 }
+          : delay
+            ? { delay }
+            : transition
+      }
       {...props}
     />
   );

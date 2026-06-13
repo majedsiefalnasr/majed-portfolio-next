@@ -1,35 +1,83 @@
 import Image from "next/image";
 import { Quote } from "lucide-react";
+import { HorizontalMarquee } from "@/components/motion/HorizontalMarquee";
 import { VerticalMarquee } from "@/components/motion/VerticalMarquee";
 import { Icon } from "@/components/ui/Icon";
-import { proofColumns, type ProofCard } from "@/data/proof";
+import { proofCards, proofColumns, type ProofCard } from "@/data/proof";
 import { cn } from "@/lib/utils";
 
 const COLUMN_SPEED = [16, 20, 18] as const;
 const COLUMN_REVERSE = [false, true, false] as const;
+const TABLET_COLUMNS: ProofCard[][] = [
+  [proofCards[0], proofCards[2]],
+  [proofCards[1], proofCards[3]],
+];
 
 /**
- * "Can I trust him with my project?" — a three-column wall of love: each
- * column drifts vertically and loops seamlessly, slowing to a crawl on
- * hover/focus rather than stopping. Demo data carries a visible chip.
- * Reduced motion drops the loop to a static stack per column.
+ * "Can I trust him with my project?" — proof cards scale from a three-column
+ * wall on desktop, to two vertical columns on tablet, to one horizontal
+ * auto-scrolling row on phones.
  */
 export function ProofMarquee() {
   return (
-    <div className="grid gap-5 motion-safe:h-[480px] sm:grid-cols-3 sm:motion-safe:h-[560px] lg:motion-safe:h-[640px] motion-safe:[mask-image:linear-gradient(to_bottom,transparent,black_6%,black_94%,transparent)]">
-      {proofColumns.map((column, i) => (
-        <VerticalMarquee
-          key={i}
-          speed={COLUMN_SPEED[i]}
-          reverse={COLUMN_REVERSE[i]}
-          gapClass="gap-5 pb-5"
-          className="h-full"
+    <>
+      <div className="hidden gap-5 motion-safe:h-[560px] motion-safe:[mask-image:linear-gradient(to_bottom,transparent,black_6%,black_94%,transparent)] md:grid md:grid-cols-3 lg:motion-safe:h-[640px]">
+        {proofColumns.map((column, i) => (
+          <VerticalMarquee
+            key={i}
+            speed={COLUMN_SPEED[i]}
+            reverse={COLUMN_REVERSE[i]}
+            gapClass="gap-5 pb-5"
+            className="h-full"
+          >
+            {column.map((card) => (
+              <ProofCardView key={card.kicker} card={card} />
+            ))}
+          </VerticalMarquee>
+        ))}
+      </div>
+
+      <div className="hidden gap-5 motion-safe:h-[520px] motion-safe:[mask-image:linear-gradient(to_bottom,transparent,black_6%,black_94%,transparent)] sm:grid sm:grid-cols-2 md:hidden">
+        {TABLET_COLUMNS.map((column, i) => (
+          <VerticalMarquee
+            key={i}
+            speed={COLUMN_SPEED[i]}
+            reverse={COLUMN_REVERSE[i]}
+            gapClass="gap-5 pb-5"
+            className="h-full"
+          >
+            {column.map((card) => (
+              <ProofCardView key={card.kicker} card={card} />
+            ))}
+          </VerticalMarquee>
+        ))}
+      </div>
+
+      <div className="mx-[calc(50%-50vw)] sm:hidden">
+        <HorizontalMarquee
+          speed={20}
+          gapClass="gap-5 pr-5"
+          className="px-[max(1.25rem,calc(50vw-30.625rem))]"
         >
-          {column.map((card) => (
-            <ProofCardView key={card.kicker} card={card} />
+          {proofCards.map((card) => (
+            <ProofCardItem key={card.kicker} card={card} className="w-[82vw]" />
           ))}
-        </VerticalMarquee>
-      ))}
+        </HorizontalMarquee>
+      </div>
+    </>
+  );
+}
+
+function ProofCardItem({
+  card,
+  className,
+}: {
+  card: ProofCard;
+  className?: string;
+}) {
+  return (
+    <div className={cn("shrink-0", className)}>
+      <ProofCardView card={card} />
     </div>
   );
 }

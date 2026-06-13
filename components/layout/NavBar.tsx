@@ -20,7 +20,16 @@ const links = [
 export function NavBar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const updateScrolled = () => setIsScrolled(window.scrollY > 24);
+
+    updateScrolled();
+    window.addEventListener("scroll", updateScrolled, { passive: true });
+    return () => window.removeEventListener("scroll", updateScrolled);
+  }, []);
 
   // Close on Escape and outside click.
   useEffect(() => {
@@ -41,11 +50,18 @@ export function NavBar() {
 
   return (
     <header
-      className="sticky top-0 w-full bg-background/80 backdrop-blur-md"
+      className="sticky top-0 w-full px-3 py-4 sm:px-5"
       style={{ zIndex: "var(--z-nav)" }}
     >
-      <nav className="w-full px-5 sm:px-8 pt-4">
-        <div className="mx-auto flex h-[72px] max-w-page items-center justify-between">
+      <nav
+        className={cn(
+          "mx-auto flex h-[72px] items-center justify-between bg-background/80 backdrop-blur-md transition-[max-width,height,padding,background-color,border-radius,box-shadow] duration-500 [transition-timing-function:var(--ease-out-quart)]",
+          isScrolled
+            ? "max-w-[min(36rem,calc(100vw-1.5rem))] rounded-pill px-3 ring-1 ring-ink/5"
+            : "max-w-page rounded-none px-2 ring-0 sm:px-3",
+        )}
+        aria-label="Primary navigation"
+      >
         <Link
           href="/"
           aria-label={`${siteConfig.name} — home`}
@@ -73,7 +89,9 @@ export function NavBar() {
         </Link>
 
         <div className="flex items-center gap-2" ref={panelRef}>
-          <CtaLink href={siteConfig.links.bookingEmail}>Let&apos;s talk</CtaLink>
+          <CtaLink href={siteConfig.links.bookingEmail} className="hidden sm:inline-flex">
+            Let&apos;s talk
+          </CtaLink>
 
           <div className="relative">
             <button
@@ -105,6 +123,23 @@ export function NavBar() {
                 !open && "pointer-events-none",
               )}
             >
+              <li
+                className={cn(
+                  "sm:hidden transition duration-200 [transition-timing-function:var(--ease-out-quart)]",
+                  open
+                    ? "translate-y-0 opacity-100"
+                    : "-translate-y-2 opacity-0 pointer-events-none",
+                )}
+              >
+                <Link
+                  href={siteConfig.links.bookingEmail}
+                  tabIndex={open ? undefined : -1}
+                  onClick={() => setOpen(false)}
+                  className="tap-feedback flex h-[54px] items-center whitespace-nowrap rounded-pill bg-ink px-6 text-[15px] font-semibold text-paper shadow-[0_8px_8px_-8px_rgba(26,26,26,0.18)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                >
+                  Let&apos;s talk
+                </Link>
+              </li>
               {links.map((link, i) => {
                 const active =
                   link.href === "/"
@@ -119,7 +154,11 @@ export function NavBar() {
                         ? "translate-y-0 opacity-100"
                         : "-translate-y-2 opacity-0 pointer-events-none",
                     )}
-                    style={{ transitionDelay: open ? `${i * 40}ms` : "0ms" }}
+                    style={{
+                      transitionDelay: open
+                        ? `${(i + 1) * 40}ms`
+                        : "0ms",
+                    }}
                   >
                     <Link
                       href={link.href}
@@ -137,7 +176,6 @@ export function NavBar() {
               })}
             </ul>
           </div>
-        </div>
         </div>
       </nav>
     </header>

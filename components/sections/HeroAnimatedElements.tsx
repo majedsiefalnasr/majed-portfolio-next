@@ -8,7 +8,8 @@ import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 import { siteConfig } from "@/lib/site-config";
 
 const HEADLINE = "Design that makes your product click.";
-const SUBLINE = "Hey, I'm Majed 👋 For 7 years I've turned tangled products into ones people understand the moment they open them.";
+const SUBLINE =
+  "Hey, I'm Majed 👋 For 7 years I've turned tangled products into ones people understand the moment they open them.";
 
 /**
  * Hero entrance: word-by-word blur+opacity+rise on mount, matching the
@@ -35,10 +36,10 @@ export function HeroAnimatedElements() {
   const ctaDelay = sublineDelay + 0.15;
 
   return (
-    <div className="flex flex-col items-center gap-6 text-center">
+    <div className="flex w-full max-w-[min(100%,48rem)] flex-col items-center gap-6 px-1 text-center">
       {/* Status pill */}
       <p
-        className="flex items-center gap-2.5 rounded-pill bg-surface px-4 py-2 text-sm font-medium text-title ring-1 ring-ink/5"
+        className="flex max-w-full items-center justify-center gap-2.5 rounded-pill bg-surface px-4 py-2 text-center text-[0.8125rem] font-medium leading-snug text-title ring-1 ring-ink/5 sm:text-sm"
         style={{
           opacity: inView ? 1 : 0,
           transform: inView ? "translateY(0)" : "translateY(0.4em)",
@@ -77,7 +78,7 @@ export function HeroAnimatedElements() {
 
       {/* CTAs */}
       <div
-        className="relative mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-3"
+        className="relative mt-2 flex w-full flex-col items-stretch justify-center gap-3 min-[420px]:w-auto min-[420px]:flex-row min-[420px]:flex-wrap min-[420px]:items-center min-[420px]:gap-x-4"
         style={{
           opacity: inView ? 1 : 0,
           transform: inView ? "translateY(0)" : "translateY(0.5em)",
@@ -87,8 +88,14 @@ export function HeroAnimatedElements() {
           transitionTimingFunction: "cubic-bezier(0.22,1,0.36,1)",
         }}
       >
-        <CtaLink href="/work">See my work</CtaLink>
-        <CtaLink href={siteConfig.links.bookingEmail} variant="secondary">
+        <CtaLink href="/work" className="w-full min-[420px]:w-auto">
+          See my work
+        </CtaLink>
+        <CtaLink
+          href={siteConfig.links.bookingEmail}
+          variant="secondary"
+          className="w-full min-[420px]:w-auto"
+        >
           Let&apos;s talk
         </CtaLink>
       </div>

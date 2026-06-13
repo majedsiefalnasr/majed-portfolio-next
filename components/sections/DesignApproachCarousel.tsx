@@ -1,9 +1,10 @@
 "use client";
 
-import { CarouselButton } from "@/components/ui/CarouselButton";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { Icon } from "@/components/ui/Icon";
 import { philosophy } from "@/data/philosophy";
-import { useCarousel } from "@/lib/use-carousel";
+import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
 /** Card tones cycling the Figma violet / plum / blush / amber / mint set,
@@ -43,58 +44,97 @@ const tones = [
 
 /**
  * "Why does his design approach work?" — the five principles as colored
- * sheets sized to their content: icon chip up top, title and description
- * anchored at the base. Scroll-snap row aligned to the content box with
- * neighbors bleeding to both viewport edges (the shared slider geometry);
- * prev/next sit at the end of the row, never centered.
+ * sheets sized to their content. The row moves horizontally as page scroll
+ * progresses, so the section reads as one continuous argument instead of a
+ * manual slider.
  */
-export function DesignApproachCarousel() {
-  const { ref, canPrev, canNext, scrollPrev, scrollNext } = useCarousel();
+export function DesignApproachCarousel({ children }: { children: ReactNode }) {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLUListElement>(null);
+  const [travel, setTravel] = useState(0);
+  const reducedMotion = usePrefersReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  });
+  const x = useTransform(scrollYProgress, [0, 1], [0, -travel]);
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    const track = trackRef.current;
+    if (!viewport || !track) return;
+
+    const measure = () => {
+      setTravel(Math.max(0, track.scrollWidth - viewport.clientWidth));
+    };
+    measure();
+
+    const ro = new ResizeObserver(measure);
+    ro.observe(viewport);
+    ro.observe(track);
+    return () => ro.disconnect();
+  }, []);
 
   return (
-    <div className="mx-[calc(50%-50vw)] flex w-screen flex-col gap-8">
-      <ul
-        ref={ref}
-        aria-label="Design approach principles"
-        className="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-2 px-[max(1.25rem,calc(50vw-30.625rem))] scroll-px-[max(1.25rem,calc(50vw-30.625rem))] sm:gap-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+    <div
+      ref={sectionRef}
+      className={cn(
+        "mx-[calc(50%-50vw)] w-screen",
+        reducedMotion ? "" : "h-[185vh] sm:h-[215vh]",
+      )}
+    >
+      <div
+        ref={viewportRef}
+        className={cn(
+          "overflow-hidden",
+          reducedMotion
+            ? "overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            : "sticky top-20 flex h-[calc(100vh-14rem)] flex-col items-start pt-6",
+        )}
       >
-        {philosophy.map((item, i) => {
-          const tone = tones[i % tones.length];
-          return (
-            <li
-              key={item.title}
-              className={cn(
-                "flex min-h-[17rem] w-[78%] shrink-0 snap-start flex-col rounded-large p-7 sm:min-h-[19rem] sm:w-[21rem]",
-                tone.bg,
-              )}
-            >
-              <span
+        <div className="mx-auto w-full max-w-page px-5 sm:px-8">
+          {children}
+        </div>
+        <motion.ul
+          ref={trackRef}
+          aria-label="Design approach principles"
+          style={reducedMotion ? undefined : { x }}
+          className="mt-12 flex w-max snap-x snap-mandatory gap-5 px-[max(1.25rem,calc(50vw-30.625rem))] scroll-px-[max(1.25rem,calc(50vw-30.625rem))] sm:gap-6"
+        >
+          {philosophy.map((item, i) => {
+            const tone = tones[i % tones.length];
+            return (
+              <li
+                key={item.title}
                 className={cn(
-                  "flex size-12 items-center justify-center rounded-full",
-                  tone.chip,
+                  "flex min-h-[17rem] w-[78vw] shrink-0 snap-start flex-col rounded-large p-7 sm:min-h-[19rem] sm:w-[21rem]",
+                  tone.bg,
                 )}
               >
-                <Icon name={item.icon} className="size-5" aria-hidden />
-              </span>
-              <h3
-                className={cn(
-                  "mt-auto pt-10 text-h3 font-semibold text-balance",
-                  tone.title,
-                )}
-              >
-                {item.title}
-              </h3>
-              <p className={cn("mt-2 text-base leading-relaxed", tone.body)}>
-                {item.description}
-              </p>
-            </li>
-          );
-        })}
-      </ul>
-
-      <div className="mx-auto flex w-full max-w-page justify-end gap-3 px-5 sm:px-8">
-        <CarouselButton direction="prev" onClick={scrollPrev} disabled={!canPrev} />
-        <CarouselButton direction="next" onClick={scrollNext} disabled={!canNext} />
+                <span
+                  className={cn(
+                    "flex size-12 items-center justify-center rounded-full",
+                    tone.chip,
+                  )}
+                >
+                  <Icon name={item.icon} className="size-5" aria-hidden />
+                </span>
+                <h3
+                  className={cn(
+                    "mt-auto pt-10 text-h3 font-semibold text-balance",
+                    tone.title,
+                  )}
+                >
+                  {item.title}
+                </h3>
+                <p className={cn("mt-2 text-base leading-relaxed", tone.body)}>
+                  {item.description}
+                </p>
+              </li>
+            );
+          })}
+        </motion.ul>
       </div>
     </div>
   );

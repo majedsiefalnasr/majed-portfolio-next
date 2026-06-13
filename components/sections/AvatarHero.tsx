@@ -14,13 +14,21 @@ export function AvatarHero() {
   return (
     <div className="flex flex-col items-center gap-10 py-6 text-center sm:gap-12 sm:py-10">
       <div className="relative">
-        {/* Soft circular halo behind the avatar (Figma), not a card frame. */}
+        {/* Soft pulsing halo behind the avatar (Figma), not a card frame. */}
         <span
-          className="absolute -inset-16 rounded-full bg-white/40 blur-2xl"
+          className="avatar-pulse-ring absolute -inset-16 rounded-full bg-white/45 blur-2xl"
           aria-hidden
         />
         <span
-          className="absolute -inset-9 rounded-full bg-white/60"
+          className="avatar-pulse-ring avatar-pulse-ring-delayed absolute -inset-10 rounded-full bg-white/65"
+          aria-hidden
+        />
+        <span
+          className="avatar-pulse-ring avatar-pulse-ring-delayed-2 absolute -inset-12 rounded-full bg-white/45 blur-md"
+          aria-hidden
+        />
+        <span
+          className="avatar-pulse-ring avatar-pulse-ring-delayed-3 absolute -inset-14 rounded-full bg-white/35 blur-xl"
           aria-hidden
         />
         {/* Circular avatar over a faint grid. */}
@@ -46,14 +54,14 @@ export function AvatarHero() {
         </div>
 
         {/* Waving hand + "Who Am I?" sticky badge. */}
-        <div className="absolute -bottom-2 -left-12 flex items-end gap-1 sm:-left-16">
+        <div className="absolute -bottom-6 -left-6 flex items-end gap-1">
           <span
-            className="-mb-1 inline-block origin-[70%_80%] animate-wave select-none text-4xl motion-reduce:animate-none"
+            className="absolute -top-12 -left-2 -mb-1 inline-block origin-[70%_80%] animate-wave select-none text-6xl motion-reduce:animate-none z-10"
             aria-hidden
           >
             👋
           </span>
-          <span className="-rotate-[7deg] rounded-pill bg-warning px-4 py-2 text-base font-semibold text-ink shadow-sm">
+          <span className="-rotate-[7deg] rounded-pill bg-warning px-4 py-2 text-base font-semibold text-[20px] text-ink shadow-sm">
             Who Am I?
           </span>
         </div>
