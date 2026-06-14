@@ -10,10 +10,10 @@ export function WorkInfoRow({ work }: { work: Work }) {
   if (!locationYear && !role && !(tools && tools.length > 0)) return null;
 
   return (
-    <div className="flex w-full flex-wrap justify-center gap-x-16 gap-y-5 text-left">
+    <div className="flex w-full flex-col gap-y-5 text-left sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-14">
       {locationYear && (
         <div className="flex flex-col gap-1">
-          <span className="text-sm text-body">Location &amp; year</span>
+          <span className="text-sm text-body">Project context</span>
           <span className="text-base font-medium text-title">
             {locationYear}
           </span>
@@ -21,13 +21,13 @@ export function WorkInfoRow({ work }: { work: Work }) {
       )}
       {role && (
         <div className="flex flex-col gap-1">
-          <span className="text-sm text-body">Role / Services</span>
+          <span className="text-sm text-body">Majed&apos;s role</span>
           <span className="text-base font-medium text-title">{role}</span>
         </div>
       )}
       {tools && tools.length > 0 && (
-        <div className="flex flex-col gap-2">
-          <span className="text-sm text-body">Tools Used</span>
+        <div className="flex flex-col gap-1">
+          <span className="text-sm text-body">Tools</span>
           <div className="flex gap-2">
             {tools.map((tool) => (
               <ToolIcon key={tool} tool={tool} size={36} />
