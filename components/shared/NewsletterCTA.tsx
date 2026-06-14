@@ -24,7 +24,7 @@ export function NewsletterCTA() {
 
   return (
     <div className="flex flex-col items-center gap-8 text-center">
-      <h2 className="text-h2 font-semibold text-title">📩 Join the List</h2>
+      <h2 className="text-h2 font-semibold text-title">📩 Design notes, in your inbox</h2>
       {status === "done" ? (
         <p className="flex items-center gap-2 text-lead text-body">
           <Check className="size-5 text-title" aria-hidden />

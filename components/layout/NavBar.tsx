@@ -99,7 +99,7 @@ export function NavBar() {
               aria-expanded={open}
               aria-controls="primary-menu"
               onClick={() => setOpen((v) => !v)}
-              className="tap-feedback inline-flex size-[54px] items-center justify-center rounded-pill bg-surface text-title ring-1 ring-ink/10 hover:bg-ink/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+              className="focus-ring tap-feedback inline-flex size-[54px] items-center justify-center rounded-pill bg-surface text-title ring-1 ring-ink/10 hover:bg-ink/5"
             >
               <span
                 className={cn(
@@ -134,7 +134,7 @@ export function NavBar() {
                   href={siteConfig.links.bookingEmail}
                   tabIndex={open ? undefined : -1}
                   onClick={() => setOpen(false)}
-                  className="tap-feedback flex h-[54px] items-center whitespace-nowrap rounded-pill bg-ink px-6 text-[15px] font-semibold text-paper shadow-[0_8px_8px_-8px_rgba(26,26,26,0.18)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                  className="focus-ring tap-feedback flex h-[54px] items-center whitespace-nowrap rounded-pill bg-ink px-6 text-[15px] font-semibold text-paper shadow-[0_8px_8px_-8px_rgba(26,26,26,0.18)]"
                 >
                   Let&apos;s talk
                 </Link>
@@ -164,7 +164,7 @@ export function NavBar() {
                       tabIndex={open ? undefined : -1}
                       onClick={() => setOpen(false)}
                       className={cn(
-                        "tap-feedback flex h-[54px] items-center whitespace-nowrap rounded-pill bg-surface px-6 text-[15px] text-title shadow-[0_8px_8px_-8px_rgba(26,26,26,0.18)] ring-1 ring-ink/5 hover:bg-ink hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink",
+                        "focus-ring tap-feedback flex h-[54px] items-center whitespace-nowrap rounded-pill bg-surface px-6 text-[15px] text-title shadow-[0_8px_8px_-8px_rgba(26,26,26,0.18)] ring-1 ring-ink/5 hover:bg-ink hover:text-paper",
                         active ? "font-bold" : "font-semibold",
                       )}
                     >

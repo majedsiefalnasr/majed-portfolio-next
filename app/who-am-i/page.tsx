@@ -8,7 +8,7 @@ import { PageFooterSections } from "@/components/layout/PageFooterSections";
 import { getAllWork } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Who am I",
+  title: "Who am I?",
   description:
     "Majed Sief Alnasr — CX, UX/UI, and product designer with 7 years turning tangled products into ones people understand.",
 };
@@ -22,9 +22,9 @@ export default async function WhoAmIPage() {
       </Section>
 
       <Section>
-        <SectionIntro headline="Why does his design approach work?">
-          Good question! Here&apos;s how I{" "}
-          <strong>make sure every project delivers results</strong> 👇
+        <SectionIntro headline="How does he actually run a project?">
+          Same four steps, every time. Not a formula{" "}
+          <strong>— a way of making sure nothing gets skipped.</strong>
         </SectionIntro>
         <div className="mt-12">
           <ProcessSteps />
@@ -33,8 +33,8 @@ export default async function WhoAmIPage() {
 
       <Section>
         <SectionIntro headline="Is he skilled enough?">
-          I don&apos;t just talk, <strong>I prove it.</strong> Take a look at a{" "}
-          <strong>project I&apos;m proud of:</strong> 👇
+          The case studies answer that.{" "}
+          <strong>Pick any one and see the full arc:</strong>
         </SectionIntro>
         <div className="mt-12 grid gap-8 md:grid-cols-2">
           {workItems.map((work) => (

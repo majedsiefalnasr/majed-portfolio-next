@@ -1,5 +1,6 @@
 import { Check } from "lucide-react";
 import { MotionReveal } from "@/components/motion/MotionReveal";
+import { CtaLink } from "@/components/ui/CtaLink";
 import { pricingPlans, type PricingPlan } from "@/data/pricing";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
@@ -53,21 +54,19 @@ function PlanCard({ plan }: { plan: PricingPlan }) {
         ))}
       </ul>
 
-      <a
+      <CtaLink
         href={
           plan.cta.type === "booking"
             ? siteConfig.links.booking
             : `${siteConfig.links.bookingEmail}?subject=${encodeURIComponent(plan.cta.subject)}`
         }
         className={cn(
-          "tap-feedback mt-auto inline-flex h-[54px] items-center justify-center rounded-pill px-8 text-base font-medium focus-visible:outline-2 focus-visible:outline-offset-2",
-          featured
-            ? "bg-paper text-ink outline-paper hover:bg-paper/90"
-            : "bg-ink text-paper outline-ink hover:bg-ink/90",
+          "mt-auto",
+          featured && "bg-paper text-ink focus-visible:outline-paper hover:bg-paper/90",
         )}
       >
         {plan.cta.label}
-      </a>
+      </CtaLink>
     </article>
   );
 }

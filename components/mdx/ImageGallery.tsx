@@ -41,7 +41,7 @@ export function ImageGallery({ images, columns = 2 }: ImageGalleryProps) {
           type="button"
           onClick={(e) => onOpen(e, i)}
           aria-label={`Enlarge image: ${img.alt}`}
-          className="group relative aspect-[4/3] cursor-zoom-in overflow-hidden rounded-large bg-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+          className="focus-ring group relative aspect-[4/3] cursor-zoom-in overflow-hidden rounded-large bg-surface"
         >
           <Image
             src={img.src}

@@ -104,6 +104,15 @@
   --text-intro--line-height: 1.5;
 }
 
+/* Single source for the keyboard focus ring used on every interactive element. */
+@utility focus-ring {
+  &:focus-visible {
+    outline-width: 2px;
+    outline-offset: 2px;
+    outline-color: var(--color-ink);
+  }
+}
+
 :root {
   --z-skip: 60;
   --z-nav: 50;
@@ -119,6 +128,11 @@
   animation-fill-mode: both;
   animation-delay: calc(0.42s + var(--shot-index, 0) * 45ms);
   will-change: transform, opacity, filter, clip-path;
+}
+
+/* Released by JS animationend — avoids 6 permanent compositor layers. */
+.hero-work-shot[data-settled] {
+  will-change: auto;
 }
 
 .avatar-pulse-ring {

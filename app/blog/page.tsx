@@ -12,7 +12,7 @@ import { features } from "@/lib/features";
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Insights, ideas, and strategies on design, technology, and creativity.",
+    "Notes on product design, UX thinking, and the decisions behind the work.",
 };
 
 export default async function BlogPage() {
@@ -27,7 +27,7 @@ export default async function BlogPage() {
         <SectionIntro
           as="h1"
           align="center"
-          headline="Explore insights, trends, and strategies that shape exceptional user experiences."
+          headline="Notes on product design, UX thinking, and the decisions behind the work."
         />
       </Section>
 
@@ -42,9 +42,9 @@ export default async function BlogPage() {
       </Section>
 
       <Section>
-        <SectionIntro headline="Can I get his insights delivered to my inbox?">
-          <strong>Yes!</strong> Subscribe to the newsletter and never miss an
-          update. 👇
+        <SectionIntro headline="Want new posts in your inbox?">
+          Subscribe and each piece lands directly with you{" "}
+          <strong>— no feed required.</strong>
         </SectionIntro>
         <div className="mt-12">
           <NewsletterCTA />

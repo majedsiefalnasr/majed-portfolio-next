@@ -6,6 +6,9 @@ import { cn } from "@/lib/utils";
 interface BlogCardProps {
   post: BlogPost;
   variant?: "featured" | "grid";
+  /** Override next/image sizes hint. Defaults to suit the BlogCarousel (featured)
+   *  or BlogGrid (grid) context respectively. */
+  imageSizes?: string;
   className?: string;
 }
 
@@ -19,9 +22,14 @@ function formatDate(iso: string) {
 }
 
 /** Single source for blog cards on Home ("Insights") and the Blog grid. */
-export function BlogCard({ post, variant = "grid", className }: BlogCardProps) {
+export function BlogCard({ post, variant = "grid", imageSizes, className }: BlogCardProps) {
   const { slug, title, category, date, cover } = post;
   const featured = variant === "featured";
+  // Featured: carousel card is w-[min(46rem,84vw)] max 736px.
+  // Grid: two-column inside 980px max — ~478px per column.
+  const sizes = imageSizes ?? (featured
+    ? "(min-width: 880px) 736px, 84vw"
+    : "(min-width: 768px) 478px, 100vw");
 
   return (
     <Link
@@ -36,7 +44,7 @@ export function BlogCard({ post, variant = "grid", className }: BlogCardProps) {
           src={cover}
           alt={`${title} cover`}
           fill
-          sizes="(min-width: 768px) 736px, 100vw"
+          sizes={sizes}
           className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
         />
       </div>

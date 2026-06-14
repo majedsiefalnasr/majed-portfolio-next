@@ -36,7 +36,7 @@ export function CvLinks({
           key={doc.href}
           href={doc.href}
           download
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-body underline decoration-ink/30 underline-offset-4 transition-colors hover:text-title hover:decoration-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+          className="focus-ring inline-flex items-center gap-1.5 text-sm font-medium text-body underline decoration-ink/30 underline-offset-4 transition-colors hover:text-title hover:decoration-ink"
         >
           <FileDown className="size-4" aria-hidden />
           {doc.label}

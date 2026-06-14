@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import type { CSSProperties } from "react";
 import { Marquee } from "@/components/motion/Marquee";
@@ -12,6 +14,10 @@ const shots = [
   { src: "/work/bloom/cover.png", aspect: "aspect-[3/2]", tilt: "-0.6deg" },
   { src: "/work/pulse/cover.png", aspect: "aspect-[3/2]", tilt: "0.5deg" },
 ];
+
+function onShotAnimEnd(e: React.AnimationEvent<HTMLDivElement>) {
+  (e.currentTarget as HTMLDivElement).dataset.settled = "";
+}
 
 /**
  * The hero's full-bleed strip of work drifting by under the headline. Purely
@@ -36,12 +42,12 @@ export function HeroWorkMarquee() {
               "--shot-rest-tilt": shot.tilt,
               "--shot-tilt": shot.tilt,
             } as CSSProperties}
+            onAnimationEnd={onShotAnimEnd}
           >
             <Image
               src={shot.src}
               alt=""
               fill
-              priority={i < 4}
               sizes="(min-width: 768px) 500px, 360px"
               className="object-cover"
             />

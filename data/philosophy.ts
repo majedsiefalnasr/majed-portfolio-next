@@ -7,31 +7,31 @@ import type { PhilosophyItem } from "@/types";
 export const philosophy: PhilosophyItem[] = [
   {
     title: "User First, Always",
-    description: "Designing with people in mind for effortless experiences.",
+    description: "Start with the person doing the task, not the component housing it.",
     icon: "Users",
     tone: "orange",
   },
   {
     title: "Function Meets Aesthetic",
-    description: "Beauty and usability, never one at the other's expense.",
+    description: "Visual decisions earn their place by making something clearer or easier, not prettier.",
     icon: "Sparkles",
     tone: "green",
   },
   {
     title: "Simplicity Wins",
-    description: "Removing friction for a smooth, intuitive experience.",
+    description: "Cut until it breaks, then add back exactly what it needs.",
     icon: "Minimize2",
     tone: "blue",
   },
   {
     title: "Impact-Driven",
-    description: "Every detail adds value and meaning.",
+    description: "Name the metric before the first sketch, so the work has something to prove.",
     icon: "Target",
     tone: "red",
   },
   {
     title: "Collaboration Matters",
-    description: "Great design happens through teamwork.",
+    description: "The best call in a design review is the engineer who spots the edge case on day one.",
     icon: "Handshake",
     tone: "orange",
   },

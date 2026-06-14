@@ -16,7 +16,7 @@ export function FaqSection() {
             key={item.question}
             className="faq-item group rounded-large bg-surface ring-1 ring-ink/5 open:shadow-lg"
           >
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-6 text-left font-semibold text-title focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink [&::-webkit-details-marker]:hidden">
+            <summary className="focus-ring flex cursor-pointer list-none items-center justify-between gap-4 p-6 text-left font-semibold text-title [&::-webkit-details-marker]:hidden">
               {item.question}
               <svg
                 viewBox="0 0 16 16"

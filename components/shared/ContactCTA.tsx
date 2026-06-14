@@ -10,9 +10,9 @@ import { siteConfig } from "@/lib/site-config";
 export function ContactCTA() {
   return (
     <div className="flex flex-col gap-12">
-      <SectionIntro headline="How can I reach him?">
-        Have an idea, a project, or just a question?{" "}
-        <strong>I&apos;d love to hear from you.</strong> 👇
+      <SectionIntro headline="Ready to talk?">
+        Drop a line about the product, the problem, or the team.{" "}
+        <strong>That&apos;s enough to get started.</strong>
       </SectionIntro>
 
       {/* Full-bleed oversized email; it drifts sideways with scroll while the

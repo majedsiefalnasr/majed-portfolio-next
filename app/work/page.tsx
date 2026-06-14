@@ -31,7 +31,7 @@ export default async function WorkPage() {
         <div className="mt-10 flex flex-col items-center gap-3">
           <a
             href="#case-studies"
-            className="tap-feedback flex size-[50px] items-center justify-center rounded-pill bg-surface text-title ring-1 ring-ink/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+            className="focus-ring tap-feedback flex size-[50px] items-center justify-center rounded-pill bg-surface text-title ring-1 ring-ink/10"
             aria-label="Jump to case studies"
           >
             <ArrowDown className="size-4" aria-hidden />

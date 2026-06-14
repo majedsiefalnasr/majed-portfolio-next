@@ -29,7 +29,7 @@ export function ZoomImage({ src = "", alt = "" }: { src?: string; alt?: string }
         type="button"
         onClick={onOpen}
         aria-label={`Enlarge image: ${alt}`}
-        className="group relative my-8 block aspect-[16/9] w-full cursor-zoom-in overflow-hidden rounded-large bg-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+        className="focus-ring group relative my-8 block aspect-[16/9] w-full cursor-zoom-in overflow-hidden rounded-large bg-surface"
       >
         <Image
           src={src}
