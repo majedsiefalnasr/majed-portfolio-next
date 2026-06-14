@@ -34,7 +34,7 @@
   /* Availability status dot (always paired with text, never meaning alone). */
   --color-positive: #2f9e44;
 
-  /* Fonts — Geist loaded via next/font in layout.tsx */
+  /* Fonts — local Geist assets loaded via next/font/local in layout.tsx */
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
