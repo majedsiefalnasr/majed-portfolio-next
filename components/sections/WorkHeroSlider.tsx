@@ -33,6 +33,7 @@ export function WorkHeroSlider({ work }: WorkHeroSliderProps) {
       <LaptopMockup
         screenshot={screenshot}
         alt={`${title} — product on a laptop`}
+        priority
         className="w-[66%]"
       />
     </div>,

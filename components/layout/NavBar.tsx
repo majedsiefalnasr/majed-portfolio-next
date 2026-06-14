@@ -72,7 +72,6 @@ export function NavBar() {
               src="/avatar.png"
               alt=""
               fill
-              loading="eager"
               sizes="44px"
               className="object-cover object-top"
             />

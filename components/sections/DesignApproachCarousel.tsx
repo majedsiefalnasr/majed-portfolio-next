@@ -90,7 +90,7 @@ export function DesignApproachCarousel({ children }: { children: ReactNode }) {
           "overflow-hidden",
           reducedMotion
             ? "overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-            : "sticky top-20 flex h-[calc(100vh-14rem)] flex-col items-start pt-6",
+            : "sticky top-20 flex h-[calc(100vh-12rem)] flex-col items-start pt-6",
         )}
       >
         <div className="mx-auto w-full max-w-page px-5 sm:px-8">

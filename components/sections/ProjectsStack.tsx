@@ -38,7 +38,7 @@ const WORD_TOP = "8rem";
  * baseline so it covers only the descenders, not the legible letter bodies.
  * (The earlier value cut straight through the x-height and read as a slice.) */
 const cardTop = (index: number) =>
-  `calc(${WORD_TOP} + clamp(3.5rem, 10vw, 9.5rem) + ${index} * ${PEEK})`;
+  `calc(${WORD_TOP} + clamp(60px, 10vw, 120px) + ${index} * ${PEEK})`;
 
 /** A covering card's deformation window: from entering the viewport bottom
  * until its top nears its sticky offset. */
@@ -77,7 +77,11 @@ export function ProjectsStack({ workItems }: ProjectsStackProps) {
       <div
         aria-hidden
         className={cn("pointer-events-none", !isStatic && "sticky z-0")}
-        style={isStatic ? undefined : { top: WORD_TOP, height: "60px", overflow: "clip" }}
+        style={
+          isStatic
+            ? undefined
+            : { top: WORD_TOP, height: "clamp(60px, 10vw, 120px)" }
+        }
       >
         <div className="flex justify-center leading-none select-none">
           <span

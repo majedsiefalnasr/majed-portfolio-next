@@ -96,7 +96,7 @@ export function HorizontalMarquee({
       onPointerLeave={() => {
         state.current.hover = false;
       }}
-      className={cn("overflow-hidden", className)}
+      className={cn("max-w-full overflow-hidden [contain:layout_paint]", className)}
     >
       <div ref={trackRef} className="flex w-max">
         <div className={copy}>{children}</div>

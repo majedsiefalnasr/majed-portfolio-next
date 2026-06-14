@@ -4,6 +4,8 @@ import { cn } from "@/lib/utils";
 interface LaptopMockupProps {
   screenshot: string;
   alt: string;
+  /** Mark the screenshot as an above-the-fold LCP candidate. */
+  priority?: boolean;
   className?: string;
 }
 
@@ -12,7 +14,12 @@ interface LaptopMockupProps {
  * wider base bar with the lid notch. The screenshot crops to its hero. Scales
  * its image slightly on `group-hover`.
  */
-export function LaptopMockup({ screenshot, alt, className }: LaptopMockupProps) {
+export function LaptopMockup({
+  screenshot,
+  alt,
+  priority,
+  className,
+}: LaptopMockupProps) {
   return (
     <div className={cn("relative", className)}>
       {/* Display shell */}
@@ -22,6 +29,7 @@ export function LaptopMockup({ screenshot, alt, className }: LaptopMockupProps) 
             src={screenshot}
             alt={alt}
             fill
+            priority={priority}
             sizes="(min-width: 1024px) 760px, 84vw"
             // Slight top-origin upscale keeps the asset's cookie strip out of
             // the 16/10 display while preserving the hero crop.

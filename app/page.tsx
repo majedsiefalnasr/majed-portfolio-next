@@ -4,24 +4,20 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { ProjectsStack } from "@/components/sections/ProjectsStack";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { CapabilityChips } from "@/components/sections/CapabilityChips";
-import { ExperienceCapabilities } from "@/components/sections/ExperienceCapabilities";
 import { WorkShowcase } from "@/components/shared/WorkShowcase";
 import { DesignApproachCarousel } from "@/components/sections/DesignApproachCarousel";
 import { ServicesShowcase } from "@/components/sections/ServicesShowcase";
-import { TestimonialBlock } from "@/components/shared/TestimonialBlock";
 import { TrustSection } from "@/components/sections/TrustSection";
 import { BlogCarousel } from "@/components/sections/BlogCarousel";
 import { NewsletterCTA } from "@/components/shared/NewsletterCTA";
 import { ContactCTA } from "@/components/shared/ContactCTA";
 import { BookingCTA } from "@/components/shared/BookingCTA";
 import { CvLinks } from "@/components/shared/CvLinks";
-import { PricingSection } from "@/components/sections/PricingSection";
 import { ReachOutSteps } from "@/components/sections/ReachOutSteps";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { getAllWork, getAllBlogPosts } from "@/lib/content";
 import { features } from "@/lib/features";
-import { pullQuote } from "@/data/testimonials";
 
 export default async function HomePage() {
   const [workItems, posts] = await Promise.all([
@@ -81,17 +77,6 @@ export default async function HomePage() {
         </div>
       </Section>
 
-      {/* Selected Experience & Capabilities — credibility anchors */}
-      <Section>
-        <SectionIntro headline="Where has he put all this to work?">
-          Across <strong>products, industries, and teams</strong>. A snapshot
-          of the ground covered so far:
-        </SectionIntro>
-        <div className="mt-12">
-          <ExperienceCapabilities />
-        </div>
-      </Section>
-
       {/* Services — concrete ways to engage */}
       <Section>
         <SectionIntro headline="How can he help your product?">
@@ -112,19 +97,6 @@ export default async function HomePage() {
             principles guide every project:
           </SectionIntro>
         </DesignApproachCarousel>
-      </Section>
-
-      {/* Editorial pull-quote — the philosophy in one line */}
-      <Section>
-        <TestimonialBlock
-          variant="pull"
-          testimonial={{
-            quote: pullQuote.quote,
-            author: pullQuote.author,
-            role: pullQuote.role,
-            avatar: pullQuote.avatar,
-          }}
-        />
       </Section>
 
       {/* Skilled / proof */}
@@ -162,17 +134,6 @@ export default async function HomePage() {
           <NewsletterCTA />
         </Section>
       )}
-
-      {/* Pricing — no mystery before the ask */}
-      <Section>
-        <SectionIntro headline="What does working together cost?">
-          No mystery pricing. <strong>Two simple shapes</strong>, and the full
-          cost in writing before we start.
-        </SectionIntro>
-        <div className="mt-12">
-          <PricingSection />
-        </div>
-      </Section>
 
       {/* Reach-out journey */}
       <Section>

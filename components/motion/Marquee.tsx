@@ -147,7 +147,7 @@ export function Marquee({
     <div
       ref={containerRef}
       className={cn(
-        "overflow-hidden select-none",
+        "max-w-full overflow-hidden select-none [contain:layout_paint]",
         !inert && "cursor-grab active:cursor-grabbing [touch-action:pan-y]",
         className,
       )}
