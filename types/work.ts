@@ -4,11 +4,18 @@ export interface WorkMetric {
   label: string;
 }
 
+export interface WorkCovers {
+  desktop?: string;
+  mobile?: string;
+  tablet?: string;
+}
+
 /** Frontmatter contract for content/work/*.mdx. Source of truth. */
 export interface WorkFrontmatter {
   title: string;
   description: string;
-  cover: string;
+  /** Legacy single cover — prefer `covers`. Used as fallback for desktop. */
+  cover?: string;
   tags: string[];
   metrics: WorkMetric[];
   /** Display order on listing pages (lower = earlier). */
@@ -16,8 +23,8 @@ export interface WorkFrontmatter {
   featured?: boolean;
   /** Brand lockup image for the work listing rows. */
   logo?: string;
-  /** Hero screenshot used in browser/laptop mockups (falls back to cover). */
-  screenshot?: string;
+  /** Per-device cover images. Drives which device mock(s) render in WorkShowcase. */
+  covers?: WorkCovers;
   /** Brand accent color; tints the showcase card's wash and glow. */
   accent?: string;
   /** Full-bleed banner fill on the work listing (defaults to accent). */

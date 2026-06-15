@@ -23,7 +23,8 @@ export function WorkCard({
   label,
   className,
 }: WorkCardProps) {
-  const { slug, title, description, cover, tags, metrics } = work;
+  const { slug, title, description, tags, metrics } = work;
+  const cover = work.covers?.desktop ?? work.cover ?? "";
   const featured = variant === "featured";
 
   return (

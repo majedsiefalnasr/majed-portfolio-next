@@ -1,6 +1,6 @@
 "use client";
 
-import { createRef, useMemo, type ReactNode, type RefObject } from "react";
+import { createRef, useEffect, useMemo, type ReactNode, type RefObject } from "react";
 import {
   motion,
   useScroll,
@@ -69,6 +69,29 @@ export function ProjectsStack({ workItems }: ProjectsStackProps) {
     () => Array.from({ length: cards.length }, () => createRef<HTMLDivElement>()),
     [cards.length],
   );
+
+  // Equalize card heights so the stack looks uniform when cards overlap.
+  useEffect(() => {
+    const panels = wrapperRefs
+      .map((r) => r.current?.querySelector<HTMLElement>("article > div"))
+      .filter((el): el is HTMLElement => el != null);
+
+    let rafId = 0;
+    const equalize = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        // Reset so natural heights can be re-measured
+        panels.forEach((el) => { el.style.minHeight = ""; });
+        const max = Math.max(...panels.map((el) => el.getBoundingClientRect().height));
+        panels.forEach((el) => { el.style.minHeight = `${max}px`; });
+      });
+    };
+
+    equalize();
+    const ro = new ResizeObserver(equalize);
+    panels.forEach((el) => ro.observe(el));
+    return () => { ro.disconnect(); cancelAnimationFrame(rafId); };
+  }, [wrapperRefs]);
 
   if (workItems.length === 0) return null;
 

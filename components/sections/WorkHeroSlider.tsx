@@ -18,8 +18,9 @@ interface WorkHeroSliderProps {
  */
 export function WorkHeroSlider({ work }: WorkHeroSliderProps) {
   const { ref, canPrev, canNext, scrollPrev, scrollNext } = useCarousel();
-  const { slug, title, cover } = work;
-  const screenshot = work.screenshot ?? cover;
+  const { slug, title } = work;
+  const cover = work.covers?.desktop ?? work.cover ?? "";
+  const screenshot = cover;
 
   const slides = [
     <div

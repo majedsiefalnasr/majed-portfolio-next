@@ -8,8 +8,6 @@ import { LaptopMockup } from "@/components/shared/LaptopMockup";
 
 interface WorkRowProps {
   work: Work;
-  /** Laptop-screen shot (defaults to the work hero export). */
-  screenshot?: string;
   /** Full-bleed banner fill behind the device. */
   bannerColor?: string;
 }
@@ -22,11 +20,10 @@ interface WorkRowProps {
  */
 export function WorkRow({
   work,
-  screenshot,
   bannerColor,
 }: WorkRowProps) {
   const { slug, title, description, logo } = work;
-  const shot = screenshot ?? work.screenshot ?? work.cover;
+  const shot = work.covers?.desktop ?? work.cover ?? "";
   const banner =
     bannerColor ?? work.banner ?? work.accent ?? "#30e060";
 

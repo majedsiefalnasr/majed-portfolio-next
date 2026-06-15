@@ -5,8 +5,6 @@ import { DemoTag } from "@/components/shared/DemoTag";
 
 interface NextWorkTeaserProps {
   work: Work;
-  /** Browser-frame screenshot (defaults to the Zidney hero export). */
-  screenshot?: string;
 }
 
 /**
@@ -14,9 +12,9 @@ interface NextWorkTeaserProps {
  * project name on bare sand, with the browser mock clipped at the section's
  * bottom edge. On hover the mock rises toward the title. Server Component.
  */
-export function NextWorkTeaser({ work, screenshot }: NextWorkTeaserProps) {
+export function NextWorkTeaser({ work }: NextWorkTeaserProps) {
   const { slug, title } = work;
-  const shot = screenshot ?? work.screenshot ?? work.cover;
+  const shot = work.covers?.desktop ?? work.cover ?? "";
 
   return (
     <Link

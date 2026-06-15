@@ -90,7 +90,7 @@ export default async function HomePage() {
       </Section>
 
       {/* Design approach — the thinking behind the work */}
-      <Section>
+      <Section className="pb-0">
         <DesignApproachCarousel>
           <SectionIntro headline="Why does his design approach work?">
             Because it starts with <strong>people, not pixels</strong>. Five

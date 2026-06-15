@@ -15,6 +15,13 @@ interface BrowserMockProps {
   url: string;
   /** Mark the screenshot as the LCP candidate (above-the-fold instance). */
   priority?: boolean;
+  /**
+   * Image area aspect ratio. Defaults to "15/8" (desktop widescreen).
+   * Pass "9/19.5" for mobile portrait, "3/4" for tablet portrait.
+   */
+  aspect?: string;
+  /** Image sizes hint passed to next/image. */
+  sizes?: string;
   className?: string;
 }
 
@@ -23,7 +30,7 @@ interface BrowserMockProps {
  * the screenshot cropped to its hero. Rounded at the top only — every use
  * clips or bleeds the bottom edge. Scales its image on `group-hover`.
  */
-export function BrowserMock({ screenshot, alt, url, priority, className }: BrowserMockProps) {
+export function BrowserMock({ screenshot, alt, url, priority, aspect = "15/8", sizes, className }: BrowserMockProps) {
   return (
     <div
       className={cn(
@@ -50,13 +57,13 @@ export function BrowserMock({ screenshot, alt, url, priority, className }: Brows
           <Copy size={12} />
         </span>
       </div>
-      <div className="relative aspect-15/8 w-full overflow-hidden bg-white">
+      <div className="relative w-full overflow-hidden bg-white" style={{ aspectRatio: aspect }}>
         <Image
           src={screenshot}
           alt={alt}
           fill
           priority={priority}
-          sizes="(min-width: 768px) 768px, 100vw"
+          sizes={sizes ?? "(min-width: 768px) 768px, 100vw"}
           className="object-cover object-top transition-transform duration-500"
         />
       </div>
