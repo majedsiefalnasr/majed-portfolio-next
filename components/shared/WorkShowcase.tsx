@@ -39,7 +39,8 @@ export function WorkShowcase({
   const { slug, title, tags } = work;
   const accent = work.accent ?? "#aee5a0";
   const covers = work.covers ?? (work.cover ? { desktop: work.cover } : {});
-  const mobileOnly = !!covers.mobile && !covers.desktop && !covers.tablet;
+  const deviceType = work.deviceType;
+  const mobileOnly = !deviceType && !!covers.mobile && !covers.desktop && !covers.tablet;
 
   const metricRow = work.metrics.length > 0 && (
     <dl className="flex flex-wrap justify-center gap-x-14 gap-y-5 text-left">
@@ -61,7 +62,10 @@ export function WorkShowcase({
     >
       <article>
         <div
-          className="relative overflow-hidden rounded-card bg-surface ring-1 ring-ink/5 transition-shadow duration-300 group-hover:shadow-xl"
+          className={cn(
+            "relative overflow-clip rounded-card bg-surface ring-1 ring-ink/5 transition-shadow duration-300 group-hover:shadow-xl",
+            deviceType && "flex flex-col",
+          )}
         >
           {mobileOnly ? (
             /* ── Mobile-only: text left, phone right. min-h matches desktop card height
@@ -107,6 +111,7 @@ export function WorkShowcase({
                   covers={covers}
                   title={title}
                   slug={slug}
+                  deviceType={deviceType}
                   priority={priority}
                   className="relative w-[55%]"
                 />
@@ -142,7 +147,10 @@ export function WorkShowcase({
                 {metrics === "info" && <WorkInfoRow work={work} />}
               </div>
 
-              <div className="relative mt-7 w-full">
+              <div className={cn(
+                "relative w-full",
+                deviceType ? "flex-1 min-h-0 max-h-[400px] mt-10 sm:mt-16" : "mt-7",
+              )}>
                 <div
                   aria-hidden
                   className="absolute inset-x-0 -top-28 bottom-0"
@@ -154,8 +162,12 @@ export function WorkShowcase({
                   covers={covers}
                   title={title}
                   slug={slug}
+                  deviceType={deviceType}
                   priority={priority}
-                  className="relative mx-auto w-[88%] sm:w-3/4"
+                  className={cn(
+                    "relative",
+                    deviceType ? "mx-auto w-full" : "mx-auto w-[88%] sm:w-3/4",
+                  )}
                 />
               </div>
             </>

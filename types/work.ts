@@ -4,10 +4,14 @@ export interface WorkMetric {
   label: string;
 }
 
+export type DeviceType = "desktop" | "tablet" | "mobile";
+
 export interface WorkCovers {
   desktop?: string;
   mobile?: string;
   tablet?: string;
+  left?: string;
+  right?: string;
 }
 
 /** Frontmatter contract for content/work/*.mdx. Source of truth. */
@@ -37,6 +41,8 @@ export interface WorkFrontmatter {
   demo?: boolean;
   /** Tool names shown in the info row, e.g. ["Figma", "React"] */
   tools?: string[];
+  /** Primary device type — drives which device frame renders in showcase cards. */
+  deviceType?: DeviceType;
 }
 
 /** A resolved work entry: frontmatter + routing slug. */

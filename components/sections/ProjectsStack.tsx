@@ -81,9 +81,9 @@ export function ProjectsStack({ workItems }: ProjectsStackProps) {
       cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(() => {
         // Reset so natural heights can be re-measured
-        panels.forEach((el) => { el.style.minHeight = ""; });
-        const max = Math.max(...panels.map((el) => el.getBoundingClientRect().height));
-        panels.forEach((el) => { el.style.minHeight = `${max}px`; });
+        // panels.forEach((el) => { el.style.minHeight = ""; });
+        // const max = Math.max(...panels.map((el) => el.getBoundingClientRect().height));
+        // panels.forEach((el) => { el.style.minHeight = `${max}px`; });
       });
     };
 
